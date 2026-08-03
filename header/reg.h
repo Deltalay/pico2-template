@@ -1,0 +1,538 @@
+#ifndef REG_H
+#define REG_H
+
+#include <stdint.h>
+#define XIP_BASE 0x10000000UL
+#define XIP_NOCACHE_NOALLOC_BASE 0x14000000UL
+#define XIP_MAINTENANCE_BASE 0x18000000UL
+#define XIP_NOCACHE_NOALLOC_NOTRANSLATE_BASE 0x1C000000UL
+#define SRAM_BASE 0x20000000UL
+#define SRAM_STRIPED_BASE 0x20000000UL
+#define SRAM0_BASE 0x20000000UL
+#define SRAM4_BASE 0x20040000UL
+#define SRAM_STRIPED_END 0x20080000UL
+#define SRAM8_BASE 0x20080000UL
+#define SRAM9_BASE 0x20081000UL
+#define SRAM_END 0x20082000UL
+#define SYSINFO_BASE 0x40000000UL
+#define SYSCFG_BASE 0x40008000UL
+#define CLOCKS_BASE 0x40010000UL
+#define PSM_BASE 0x40018000UL
+#define RESETS_BASE 0x40020000UL
+#define RESETS_RESET (*(volatile uint32_t *)(RESETS_BASE + 0x0000UL))
+#define RESETS_WDSEL (*(volatile uint32_t *)(RESETS_BASE + 0x0004UL))
+#define RESETS_RESET_DONE (*(volatile uint32_t *)(RESETS_BASE + 0x0008UL))
+#define IO_BANK0_BASE 0x40028000UL
+#define GPIO0_STATUS (*(volatile uint32_t *)(IO_BANK0_BASE + 0x000UL))
+#define GPIO0_CTRL (*(volatile uint32_t *)(IO_BANK0_BASE + 0x004UL))
+#define GPIO1_STATUS (*(volatile uint32_t *)(IO_BANK0_BASE + 0x008UL))
+#define GPIO1_CTRL (*(volatile uint32_t *)(IO_BANK0_BASE + 0x00CUL))
+#define GPIO2_STATUS (*(volatile uint32_t *)(IO_BANK0_BASE + 0x010UL))
+#define GPIO2_CTRL (*(volatile uint32_t *)(IO_BANK0_BASE + 0x014UL))
+#define GPIO3_STATUS (*(volatile uint32_t *)(IO_BANK0_BASE + 0x018UL))
+#define GPIO3_CTRL (*(volatile uint32_t *)(IO_BANK0_BASE + 0x01CUL))
+#define GPIO4_STATUS (*(volatile uint32_t *)(IO_BANK0_BASE + 0x020UL))
+#define GPIO4_CTRL (*(volatile uint32_t *)(IO_BANK0_BASE + 0x024UL))
+#define GPIO5_STATUS (*(volatile uint32_t *)(IO_BANK0_BASE + 0x028UL))
+#define GPIO5_CTRL (*(volatile uint32_t *)(IO_BANK0_BASE + 0x02CUL))
+#define GPIO6_STATUS (*(volatile uint32_t *)(IO_BANK0_BASE + 0x030UL))
+#define GPIO6_CTRL (*(volatile uint32_t *)(IO_BANK0_BASE + 0x034UL))
+#define GPIO7_STATUS (*(volatile uint32_t *)(IO_BANK0_BASE + 0x038UL))
+#define GPIO7_CTRL (*(volatile uint32_t *)(IO_BANK0_BASE + 0x03CUL))
+#define GPIO8_STATUS (*(volatile uint32_t *)(IO_BANK0_BASE + 0x040UL))
+#define GPIO8_CTRL (*(volatile uint32_t *)(IO_BANK0_BASE + 0x044UL))
+#define GPIO9_STATUS (*(volatile uint32_t *)(IO_BANK0_BASE + 0x048UL))
+#define GPIO9_CTRL (*(volatile uint32_t *)(IO_BANK0_BASE + 0x04CUL))
+
+#define GPIO10_STATUS (*(volatile uint32_t *)(IO_BANK0_BASE + 0x050UL))
+#define GPIO10_CTRL (*(volatile uint32_t *)(IO_BANK0_BASE + 0x054UL))
+#define GPIO11_STATUS (*(volatile uint32_t *)(IO_BANK0_BASE + 0x058UL))
+#define GPIO11_CTRL (*(volatile uint32_t *)(IO_BANK0_BASE + 0x05CUL))
+#define GPIO12_STATUS (*(volatile uint32_t *)(IO_BANK0_BASE + 0x060UL))
+#define GPIO12_CTRL (*(volatile uint32_t *)(IO_BANK0_BASE + 0x064UL))
+#define GPIO13_STATUS (*(volatile uint32_t *)(IO_BANK0_BASE + 0x068UL))
+#define GPIO13_CTRL (*(volatile uint32_t *)(IO_BANK0_BASE + 0x06CUL))
+#define GPIO14_STATUS (*(volatile uint32_t *)(IO_BANK0_BASE + 0x070UL))
+#define GPIO14_CTRL (*(volatile uint32_t *)(IO_BANK0_BASE + 0x074UL))
+#define GPIO15_STATUS (*(volatile uint32_t *)(IO_BANK0_BASE + 0x078UL))
+#define GPIO15_CTRL (*(volatile uint32_t *)(IO_BANK0_BASE + 0x07CUL))
+
+#define GPIO16_STATUS (*(volatile uint32_t *)(IO_BANK0_BASE + 0x080UL))
+#define GPIO16_CTRL (*(volatile uint32_t *)(IO_BANK0_BASE + 0x084UL))
+#define GPIO17_STATUS (*(volatile uint32_t *)(IO_BANK0_BASE + 0x088UL))
+#define GPIO17_CTRL (*(volatile uint32_t *)(IO_BANK0_BASE + 0x08CUL))
+
+#define GPIO18_STATUS (*(volatile uint32_t *)(IO_BANK0_BASE + 0x090UL))
+#define GPIO18_CTRL (*(volatile uint32_t *)(IO_BANK0_BASE + 0x094UL))
+#define GPIO19_STATUS (*(volatile uint32_t *)(IO_BANK0_BASE + 0x098UL))
+#define GPIO19_CTRL (*(volatile uint32_t *)(IO_BANK0_BASE + 0x09CUL))
+#define GPIO20_STATUS (*(volatile uint32_t *)(IO_BANK0_BASE + 0x0A0UL))
+#define GPIO20_CTRL (*(volatile uint32_t *)(IO_BANK0_BASE + 0x0A4UL))
+#define GPIO21_STATUS (*(volatile uint32_t *)(IO_BANK0_BASE + 0x0A8UL))
+#define GPIO21_CTRL (*(volatile uint32_t *)(IO_BANK0_BASE + 0x0ACUL))
+#define GPIO22_STATUS (*(volatile uint32_t *)(IO_BANK0_BASE + 0x0B0UL))
+#define GPIO22_CTRL (*(volatile uint32_t *)(IO_BANK0_BASE + 0x0B4UL))
+#define GPIO23_STATUS (*(volatile uint32_t *)(IO_BANK0_BASE + 0x0B8UL))
+#define GPIO23_CTRL (*(volatile uint32_t *)(IO_BANK0_BASE + 0x0BCUL))
+#define GPIO24_STATUS (*(volatile uint32_t *)(IO_BANK0_BASE + 0x0C0UL))
+#define GPIO24_CTRL (*(volatile uint32_t *)(IO_BANK0_BASE + 0x0C4UL))
+#define GPIO25_STATUS (*(volatile uint32_t *)(IO_BANK0_BASE + 0x0C8UL))
+#define GPIO25_CTRL (*(volatile uint32_t *)(IO_BANK0_BASE + 0x0CCUL))
+#define GPIO26_STATUS (*(volatile uint32_t *)(IO_BANK0_BASE + 0x0D0UL))
+#define GPIO26_CTRL (*(volatile uint32_t *)(IO_BANK0_BASE + 0x0D4UL))
+#define GPIO27_STATUS (*(volatile uint32_t *)(IO_BANK0_BASE + 0x0D8UL))
+#define GPIO27_CTRL (*(volatile uint32_t *)(IO_BANK0_BASE + 0x0DCUL))
+#define GPIO28_STATUS (*(volatile uint32_t *)(IO_BANK0_BASE + 0x0E0UL))
+#define GPIO28_CTRL (*(volatile uint32_t *)(IO_BANK0_BASE + 0x0E4UL))
+#define GPIO29_STATUS (*(volatile uint32_t *)(IO_BANK0_BASE + 0x0E8UL))
+#define GPIO29_CTRL (*(volatile uint32_t *)(IO_BANK0_BASE + 0x0ECUL))
+#define GPIO30_STATUS (*(volatile uint32_t *)(IO_BANK0_BASE + 0x0F0UL))
+#define GPIO30_CTRL (*(volatile uint32_t *)(IO_BANK0_BASE + 0x0F4UL))
+#define GPIO31_STATUS (*(volatile uint32_t *)(IO_BANK0_BASE + 0x0F8UL))
+#define GPIO31_CTRL (*(volatile uint32_t *)(IO_BANK0_BASE + 0x0FCUL))
+
+#define GPIO32_STATUS (*(volatile uint32_t *)(IO_BANK0_BASE + 0x100UL))
+#define GPIO32_CTRL (*(volatile uint32_t *)(IO_BANK0_BASE + 0x104UL))
+#define GPIO33_STATUS (*(volatile uint32_t *)(IO_BANK0_BASE + 0x108UL))
+#define GPIO33_CTRL (*(volatile uint32_t *)(IO_BANK0_BASE + 0x10CUL))
+#define GPIO34_STATUS (*(volatile uint32_t *)(IO_BANK0_BASE + 0x110UL))
+#define GPIO34_CTRL (*(volatile uint32_t *)(IO_BANK0_BASE + 0x114UL))
+#define GPIO35_STATUS (*(volatile uint32_t *)(IO_BANK0_BASE + 0x118UL))
+#define GPIO35_CTRL (*(volatile uint32_t *)(IO_BANK0_BASE + 0x11CUL))
+#define GPIO36_STATUS (*(volatile uint32_t *)(IO_BANK0_BASE + 0x120UL))
+#define GPIO36_CTRL (*(volatile uint32_t *)(IO_BANK0_BASE + 0x124UL))
+#define GPIO37_STATUS (*(volatile uint32_t *)(IO_BANK0_BASE + 0x128UL))
+#define GPIO37_CTRL (*(volatile uint32_t *)(IO_BANK0_BASE + 0x12CUL))
+#define GPIO38_STATUS (*(volatile uint32_t *)(IO_BANK0_BASE + 0x130UL))
+#define GPIO38_CTRL (*(volatile uint32_t *)(IO_BANK0_BASE + 0x134UL))
+#define GPIO39_STATUS (*(volatile uint32_t *)(IO_BANK0_BASE + 0x138UL))
+#define GPIO39_CTRL (*(volatile uint32_t *)(IO_BANK0_BASE + 0x13CUL))
+#define GPIO40_STATUS (*(volatile uint32_t *)(IO_BANK0_BASE + 0x140UL))
+#define GPIO40_CTRL (*(volatile uint32_t *)(IO_BANK0_BASE + 0x144UL))
+#define GPIO41_STATUS (*(volatile uint32_t *)(IO_BANK0_BASE + 0x148UL))
+#define GPIO41_CTRL (*(volatile uint32_t *)(IO_BANK0_BASE + 0x14CUL))
+#define GPIO42_STATUS (*(volatile uint32_t *)(IO_BANK0_BASE + 0x150UL))
+#define GPIO42_CTRL (*(volatile uint32_t *)(IO_BANK0_BASE + 0x154UL))
+#define GPIO43_STATUS (*(volatile uint32_t *)(IO_BANK0_BASE + 0x158UL))
+#define GPIO43_CTRL (*(volatile uint32_t *)(IO_BANK0_BASE + 0x15CUL))
+#define GPIO44_STATUS (*(volatile uint32_t *)(IO_BANK0_BASE + 0x160UL))
+#define GPIO44_CTRL (*(volatile uint32_t *)(IO_BANK0_BASE + 0x164UL))
+#define GPIO45_STATUS (*(volatile uint32_t *)(IO_BANK0_BASE + 0x168UL))
+#define GPIO45_CTRL (*(volatile uint32_t *)(IO_BANK0_BASE + 0x16CUL))
+#define GPIO46_STATUS (*(volatile uint32_t *)(IO_BANK0_BASE + 0x170UL))
+#define GPIO46_CTRL (*(volatile uint32_t *)(IO_BANK0_BASE + 0x174UL))
+#define GPIO47_STATUS (*(volatile uint32_t *)(IO_BANK0_BASE + 0x178UL))
+#define GPIO47_CTRL    (*(volatile uint32_t *)(IO_BANK0_BASE + 0x17CUL)
+
+#define IRQSUMMARY_PROC0_SECURE0                                               \
+  (*(volatile uint32_t *)(IO_BANK0_BASE + 0x200UL))
+#define IRQSUMMARY_PROC0_SECURE1                                               \
+  (*(volatile uint32_t *)(IO_BANK0_BASE + 0x204UL))
+#define IRQSUMMARY_PROC0_NONSECURE0                                            \
+  (*(volatile uint32_t *)(IO_BANK0_BASE + 0x208UL))
+#define IRQSUMMARY_PROC0_NONSECURE1                                            \
+  (*(volatile uint32_t *)(IO_BANK0_BASE + 0x20CUL))
+
+#define IRQSUMMARY_PROC1_SECURE0                                               \
+  (*(volatile uint32_t *)(IO_BANK0_BASE + 0x210UL))
+#define IRQSUMMARY_PROC1_SECURE1                                               \
+  (*(volatile uint32_t *)(IO_BANK0_BASE + 0x214UL))
+#define IRQSUMMARY_PROC1_NONSECURE0                                            \
+  (*(volatile uint32_t *)(IO_BANK0_BASE + 0x218UL))
+#define IRQSUMMARY_PROC1_NONSECURE1                                            \
+  (*(volatile uint32_t *)(IO_BANK0_BASE + 0x21CUL))
+
+#define INTR0 (*(volatile uint32_t *)(IO_BANK0_BASE + 0x230UL))
+#define INTR1 (*(volatile uint32_t *)(IO_BANK0_BASE + 0x234UL))
+#define INTR2 (*(volatile uint32_t *)(IO_BANK0_BASE + 0x238UL))
+#define INTR3 (*(volatile uint32_t *)(IO_BANK0_BASE + 0x23CUL))
+#define INTR4 (*(volatile uint32_t *)(IO_BANK0_BASE + 0x240UL))
+#define INTR5 (*(volatile uint32_t *)(IO_BANK0_BASE + 0x244UL))
+#define PROC0_INTE0 (*(volatile uint32_t *)(IO_BANK0_BASE + 0x248UL))
+#define PROC0_INTE1 (*(volatile uint32_t *)(IO_BANK0_BASE + 0x24CUL))
+#define PROC0_INTE2 (*(volatile uint32_t *)(IO_BANK0_BASE + 0x250UL))
+#define PROC0_INTE3 (*(volatile uint32_t *)(IO_BANK0_BASE + 0x254UL))
+#define PROC0_INTE4 (*(volatile uint32_t *)(IO_BANK0_BASE + 0x258UL))
+#define PROC0_INTE5 (*(volatile uint32_t *)(IO_BANK0_BASE + 0x25CUL))
+#define PROC0_INTF0 (*(volatile uint32_t *)(IO_BANK0_BASE + 0x260UL))
+#define PROC0_INTF1 (*(volatile uint32_t *)(IO_BANK0_BASE + 0x264UL))
+#define PROC0_INTF2 (*(volatile uint32_t *)(IO_BANK0_BASE + 0x268UL))
+#define PROC0_INTF3 (*(volatile uint32_t *)(IO_BANK0_BASE + 0x26CUL))
+#define PROC0_INTF4 (*(volatile uint32_t *)(IO_BANK0_BASE + 0x270UL))
+#define PROC0_INTF5 (*(volatile uint32_t *)(IO_BANK0_BASE + 0x274UL))
+#define PROC0_INTS0 (*(volatile uint32_t *)(IO_BANK0_BASE + 0x278UL))
+#define PROC0_INTS1 (*(volatile uint32_t *)(IO_BANK0_BASE + 0x27CUL))
+#define PROC0_INTS2 (*(volatile uint32_t *)(IO_BANK0_BASE + 0x280UL))
+#define PROC0_INTS3 (*(volatile uint32_t *)(IO_BANK0_BASE + 0x284UL))
+#define PROC0_INTS4 (*(volatile uint32_t *)(IO_BANK0_BASE + 0x288UL))
+#define PROC0_INTS5 (*(volatile uint32_t *)(IO_BANK0_BASE + 0x28CUL))
+#define PROC1_INTE0 (*(volatile uint32_t *)(IO_BANK0_BASE + 0x290UL))
+#define PROC1_INTE1 (*(volatile uint32_t *)(IO_BANK0_BASE + 0x294UL))
+#define PROC1_INTE2 (*(volatile uint32_t *)(IO_BANK0_BASE + 0x298UL))
+#define PROC1_INTE3 (*(volatile uint32_t *)(IO_BANK0_BASE + 0x29CUL))
+#define PROC1_INTE4 (*(volatile uint32_t *)(IO_BANK0_BASE + 0x2A0UL))
+#define PROC1_INTE5 (*(volatile uint32_t *)(IO_BANK0_BASE + 0x2A4UL))
+#define PROC1_INTF0 (*(volatile uint32_t *)(IO_BANK0_BASE + 0x2A8UL))
+#define PROC1_INTF1 (*(volatile uint32_t *)(IO_BANK0_BASE + 0x2ACUL))
+#define PROC1_INTF2 (*(volatile uint32_t *)(IO_BANK0_BASE + 0x2B0UL))
+#define PROC1_INTF3 (*(volatile uint32_t *)(IO_BANK0_BASE + 0x2B4UL))
+#define PROC1_INTF4 (*(volatile uint32_t *)(IO_BANK0_BASE + 0x2B8UL))
+#define PROC1_INTF5 (*(volatile uint32_t *)(IO_BANK0_BASE + 0x2BCUL))
+#define PROC1_INTS0 (*(volatile uint32_t *)(IO_BANK0_BASE + 0x2C0UL))
+#define PROC1_INTS1 (*(volatile uint32_t *)(IO_BANK0_BASE + 0x2C4UL))
+#define PROC1_INTS2 (*(volatile uint32_t *)(IO_BANK0_BASE + 0x2C8UL))
+#define PROC1_INTS3 (*(volatile uint32_t *)(IO_BANK0_BASE + 0x2CCUL))
+#define PROC1_INTS4 (*(volatile uint32_t *)(IO_BANK0_BASE + 0x2D0UL))
+#define PROC1_INTS5 (*(volatile uint32_t *)(IO_BANK0_BASE + 0x2D4UL))
+#define DORMANT_WAKE_INTE0 (*(volatile uint32_t *)(IO_BANK0_BASE + 0x2D8UL))
+#define DORMANT_WAKE_INTE1 (*(volatile uint32_t *)(IO_BANK0_BASE + 0x2DCUL))
+#define DORMANT_WAKE_INTE2 (*(volatile uint32_t *)(IO_BANK0_BASE + 0x2E0UL))
+#define DORMANT_WAKE_INTE3 (*(volatile uint32_t *)(IO_BANK0_BASE + 0x2E4UL))
+#define DORMANT_WAKE_INTE4 (*(volatile uint32_t *)(IO_BANK0_BASE + 0x2E8UL))
+#define DORMANT_WAKE_INTE5 (*(volatile uint32_t *)(IO_BANK0_BASE + 0x2ECUL))
+
+#define DORMANT_WAKE_INTF0 (*(volatile uint32_t *)(IO_BANK0_BASE + 0x2F0UL))
+#define DORMANT_WAKE_INTF1 (*(volatile uint32_t *)(IO_BANK0_BASE + 0x2F4UL))
+#define DORMANT_WAKE_INTF2 (*(volatile uint32_t *)(IO_BANK0_BASE + 0x2F8UL))
+#define DORMANT_WAKE_INTF3 (*(volatile uint32_t *)(IO_BANK0_BASE + 0x2FCUL))
+#define DORMANT_WAKE_INTF4 (*(volatile uint32_t *)(IO_BANK0_BASE + 0x300UL))
+#define DORMANT_WAKE_INTF5 (*(volatile uint32_t *)(IO_BANK0_BASE + 0x304UL))
+
+#define DORMANT_WAKE_INTS0 (*(volatile uint32_t *)(IO_BANK0_BASE + 0x308UL))
+#define DORMANT_WAKE_INTS1 (*(volatile uint32_t *)(IO_BANK0_BASE + 0x30CUL))
+#define DORMANT_WAKE_INTS2 (*(volatile uint32_t *)(IO_BANK0_BASE + 0x310UL))
+#define DORMANT_WAKE_INTS3 (*(volatile uint32_t *)(IO_BANK0_BASE + 0x314UL))
+#define DORMANT_WAKE_INTS4 (*(volatile uint32_t *)(IO_BANK0_BASE + 0x318UL))
+#define DORMANT_WAKE_INTS5 (*(volatile uint32_t *)(IO_BANK0_BASE + 0x31CUL))
+#define IO_QSPI_BASE 0x40030000UL
+
+#define PADS_BANK0_BASE 0x40038000UL
+#define PADS_BANK0_VOLTAGE_SELECT                                              \
+  (*(volatile uint32_t *)(PADS_BANK0_BASE + 0x00UL))
+
+/* GPIO PAD CONTROL REGISTERS */
+
+#define PADS_BANK0_GPIO0 (*(volatile uint32_t *)(PADS_BANK0_BASE + 0x04UL))
+#define PADS_BANK0_GPIO1 (*(volatile uint32_t *)(PADS_BANK0_BASE + 0x08UL))
+#define PADS_BANK0_GPIO2 (*(volatile uint32_t *)(PADS_BANK0_BASE + 0x0CUL))
+#define PADS_BANK0_GPIO3 (*(volatile uint32_t *)(PADS_BANK0_BASE + 0x10UL))
+#define PADS_BANK0_GPIO4 (*(volatile uint32_t *)(PADS_BANK0_BASE + 0x14UL))
+#define PADS_BANK0_GPIO5 (*(volatile uint32_t *)(PADS_BANK0_BASE + 0x18UL))
+#define PADS_BANK0_GPIO6 (*(volatile uint32_t *)(PADS_BANK0_BASE + 0x1CUL))
+#define PADS_BANK0_GPIO7 (*(volatile uint32_t *)(PADS_BANK0_BASE + 0x20UL))
+#define PADS_BANK0_GPIO8 (*(volatile uint32_t *)(PADS_BANK0_BASE + 0x24UL))
+
+#define PADS_BANK0_GPIO9 (*(volatile uint32_t *)(PADS_BANK0_BASE + 0x28UL))
+#define PADS_BANK0_GPIO10 (*(volatile uint32_t *)(PADS_BANK0_BASE + 0x2CUL))
+#define PADS_BANK0_GPIO11 (*(volatile uint32_t *)(PADS_BANK0_BASE + 0x30UL))
+#define PADS_BANK0_GPIO12 (*(volatile uint32_t *)(PADS_BANK0_BASE + 0x34UL))
+#define PADS_BANK0_GPIO13 (*(volatile uint32_t *)(PADS_BANK0_BASE + 0x38UL))
+#define PADS_BANK0_GPIO14 (*(volatile uint32_t *)(PADS_BANK0_BASE + 0x3CUL))
+#define PADS_BANK0_GPIO15 (*(volatile uint32_t *)(PADS_BANK0_BASE + 0x40UL))
+#define PADS_BANK0_GPIO16 (*(volatile uint32_t *)(PADS_BANK0_BASE + 0x44UL))
+#define PADS_BANK0_GPIO17 (*(volatile uint32_t *)(PADS_BANK0_BASE + 0x48UL))
+#define PADS_BANK0_GPIO18 (*(volatile uint32_t *)(PADS_BANK0_BASE + 0x4CUL))
+#define PADS_BANK0_GPIO19 (*(volatile uint32_t *)(PADS_BANK0_BASE + 0x50UL))
+
+#define PADS_BANK0_GPIO20 (*(volatile uint32_t *)(PADS_BANK0_BASE + 0x54UL))
+#define PADS_BANK0_GPIO21 (*(volatile uint32_t *)(PADS_BANK0_BASE + 0x58UL))
+#define PADS_BANK0_GPIO22 (*(volatile uint32_t *)(PADS_BANK0_BASE + 0x5CUL))
+#define PADS_BANK0_GPIO23 (*(volatile uint32_t *)(PADS_BANK0_BASE + 0x60UL))
+#define PADS_BANK0_GPIO24 (*(volatile uint32_t *)(PADS_BANK0_BASE + 0x64UL))
+#define PADS_BANK0_GPIO25 (*(volatile uint32_t *)(PADS_BANK0_BASE + 0x68UL))
+#define PADS_BANK0_GPIO26 (*(volatile uint32_t *)(PADS_BANK0_BASE + 0x6CUL))
+#define PADS_BANK0_GPIO27 (*(volatile uint32_t *)(PADS_BANK0_BASE + 0x70UL))
+#define PADS_BANK0_GPIO28 (*(volatile uint32_t *)(PADS_BANK0_BASE + 0x74UL))
+#define PADS_BANK0_GPIO29 (*(volatile uint32_t *)(PADS_BANK0_BASE + 0x78UL))
+
+#define PADS_BANK0_GPIO30 (*(volatile uint32_t *)(PADS_BANK0_BASE + 0x7CUL))
+#define PADS_BANK0_GPIO31 (*(volatile uint32_t *)(PADS_BANK0_BASE + 0x80UL))
+#define PADS_BANK0_GPIO32 (*(volatile uint32_t *)(PADS_BANK0_BASE + 0x84UL))
+#define PADS_BANK0_GPIO33 (*(volatile uint32_t *)(PADS_BANK0_BASE + 0x88UL))
+#define PADS_BANK0_GPIO34 (*(volatile uint32_t *)(PADS_BANK0_BASE + 0x8CUL))
+#define PADS_BANK0_GPIO35 (*(volatile uint32_t *)(PADS_BANK0_BASE + 0x90UL))
+#define PADS_BANK0_GPIO36 (*(volatile uint32_t *)(PADS_BANK0_BASE + 0x94UL))
+#define PADS_BANK0_GPIO37 (*(volatile uint32_t *)(PADS_BANK0_BASE + 0x98UL))
+#define PADS_BANK0_GPIO38 (*(volatile uint32_t *)(PADS_BANK0_BASE + 0x9CUL))
+#define PADS_BANK0_GPIO39 (*(volatile uint32_t *)(PADS_BANK0_BASE + 0xA0UL))
+
+#define PADS_BANK0_GPIO40 (*(volatile uint32_t *)(PADS_BANK0_BASE + 0xA4UL))
+#define PADS_BANK0_GPIO41 (*(volatile uint32_t *)(PADS_BANK0_BASE + 0xA8UL))
+#define PADS_BANK0_GPIO42 (*(volatile uint32_t *)(PADS_BANK0_BASE + 0xACUL))
+#define PADS_BANK0_GPIO43 (*(volatile uint32_t *)(PADS_BANK0_BASE + 0xB0UL))
+#define PADS_BANK0_GPIO44 (*(volatile uint32_t *)(PADS_BANK0_BASE + 0xB4UL))
+#define PADS_BANK0_GPIO45 (*(volatile uint32_t *)(PADS_BANK0_BASE + 0xB8UL))
+#define PADS_BANK0_GPIO46 (*(volatile uint32_t *)(PADS_BANK0_BASE + 0xBCUL))
+#define PADS_BANK0_GPIO47 (*(volatile uint32_t *)(PADS_BANK0_BASE + 0xC0UL))
+
+/* DEBUG PADS */
+
+#define PADS_BANK0_SWCLK (*(volatile uint32_t *)(PADS_BANK0_BASE + 0xC4UL))
+
+#define PADS_BANK0_SWD (*(volatile uint32_t *)(PADS_BANK0_BASE + 0xC8UL))
+
+#define PADS_QSPI_BASE 0x40040000UL
+
+#define XOSC_BASE 0x40048000UL
+#define PLL_SYS_BASE 0x40050000UL
+#define PLL_USB_BASE 0x40058000UL
+
+#define ACCESSCTRL_BASE 0x40060000UL
+#define BUSCTRL_BASE 0x40068000UL
+
+#define UART0_BASE 0x40070000UL
+#define UART1_BASE 0x40078000UL
+
+#define SPI0_BASE 0x40080000UL
+#define SPI1_BASE 0x40088000UL
+
+#define I2C0_BASE 0x40090000UL
+#define I2C1_BASE 0x40098000UL
+
+#define ADC_BASE 0x400A0000UL
+#define PWM_BASE 0x400A8000UL
+
+#define TIMER0_BASE 0x400B0000UL
+#define TIMER1_BASE 0x400B8000UL
+
+#define HSTX_CTRL_BASE 0x400C0000UL
+
+#define XIP_CTRL_BASE 0x400C8000UL
+#define XIP_QMI_BASE 0x400D0000UL
+
+#define WATCHDOG_BASE 0x400D8000UL
+
+#define BOOTRAM_BASE 0x400E0000UL
+#define ROSC_BASE 0x400E8000UL
+
+#define TRNG_BASE 0x400F0000UL
+#define SHA256_BASE 0x400F8000UL
+
+#define POWMAN_BASE 0x40100000UL
+#define TICKS_BASE 0x40108000UL
+
+#define OTP_BASE 0x40120000UL
+#define OTP_DATA_BASE 0x40130000UL
+#define OTP_DATA_RAW_BASE 0x40134000UL
+#define OTP_DATA_GUARDED_BASE 0x40138000UL
+#define OTP_DATA_RAW_GUARDED_BASE 0x4013C000UL
+#define CORESIGHT_PERIPH_BASE 0x40140000UL
+#define CORESIGHT_ROMTABLE_BASE 0x40140000UL
+#define CORESIGHT_AHB_AP_CORE0_BASE 0x40142000UL
+#define CORESIGHT_AHB_AP_CORE1_BASE 0x40144000UL
+#define CORESIGHT_TIMESTAMP_GEN_BASE 0x40146000UL
+#define CORESIGHT_ATB_FUNNEL_BASE 0x40147000UL
+#define CORESIGHT_TPIU_BASE 0x40148000UL
+#define CORESIGHT_CTI_BASE 0x40149000UL
+#define CORESIGHT_APB_AP_RISCV_BASE 0x4014A000UL
+
+#define GLITCH_DETECTOR_BASE 0x40158000UL
+#define TBMAN_BASE 0x40160000UL
+#define DMA_BASE 0x50000000UL
+
+#define USBCTRL_BASE 0x50100000UL
+#define USBCTRL_DPRAM_BASE 0x50100000UL
+#define USBCTRL_REGS_BASE 0x50110000UL
+
+#define PIO0_BASE 0x50200000UL
+#define PIO1_BASE 0x50300000UL
+#define PIO2_BASE 0x50400000UL
+
+#define XIP_AUX_BASE 0x50500000UL
+
+#define HSTX_FIFO_BASE 0x50600000UL
+
+#define CORESIGHT_TRACE_BASE 0x50700000UL
+#define SIO_BASE 0xD0000000UL
+#define SIO_CPUID (*(volatile uint32_t *)(SIO_BASE + 0x000UL))
+
+#define SIO_GPIO_IN (*(volatile uint32_t *)(SIO_BASE + 0x004UL))
+
+#define SIO_GPIO_HI_IN (*(volatile uint32_t *)(SIO_BASE + 0x008UL))
+
+#define SIO_GPIO_OUT (*(volatile uint32_t *)(SIO_BASE + 0x010UL))
+
+#define SIO_GPIO_HI_OUT (*(volatile uint32_t *)(SIO_BASE + 0x014UL))
+
+#define SIO_GPIO_OUT_SET (*(volatile uint32_t *)(SIO_BASE + 0x018UL))
+
+#define SIO_GPIO_HI_OUT_SET (*(volatile uint32_t *)(SIO_BASE + 0x01CUL))
+
+#define SIO_GPIO_OUT_CLR (*(volatile uint32_t *)(SIO_BASE + 0x020UL))
+
+#define SIO_GPIO_HI_OUT_CLR (*(volatile uint32_t *)(SIO_BASE + 0x024UL))
+
+#define SIO_GPIO_OUT_XOR (*(volatile uint32_t *)(SIO_BASE + 0x028UL))
+
+#define SIO_GPIO_HI_OUT_XOR (*(volatile uint32_t *)(SIO_BASE + 0x02CUL))
+
+#define SIO_GPIO_OE (*(volatile uint32_t *)(SIO_BASE + 0x030UL))
+
+#define SIO_GPIO_HI_OE (*(volatile uint32_t *)(SIO_BASE + 0x034UL))
+
+#define SIO_GPIO_OE_SET (*(volatile uint32_t *)(SIO_BASE + 0x038UL))
+
+#define SIO_GPIO_HI_OE_SET (*(volatile uint32_t *)(SIO_BASE + 0x03CUL))
+
+#define SIO_GPIO_OE_CLR (*(volatile uint32_t *)(SIO_BASE + 0x040UL))
+
+#define SIO_GPIO_HI_OE_CLR (*(volatile uint32_t *)(SIO_BASE + 0x044UL))
+
+#define SIO_GPIO_OE_XOR (*(volatile uint32_t *)(SIO_BASE + 0x048UL))
+
+#define SIO_GPIO_HI_OE_XOR (*(volatile uint32_t *)(SIO_BASE + 0x04CUL))
+
+#define SIO_FIFO_ST (*(volatile uint32_t *)(SIO_BASE + 0x050UL))
+
+#define SIO_FIFO_WR (*(volatile uint32_t *)(SIO_BASE + 0x054UL))
+
+#define SIO_FIFO_RD (*(volatile uint32_t *)(SIO_BASE + 0x058UL))
+
+#define SIO_SPINLOCK_ST (*(volatile uint32_t *)(SIO_BASE + 0x05CUL))
+
+#define SIO_INTERP0_ACCUM0 (*(volatile uint32_t *)(SIO_BASE + 0x080UL))
+
+#define SIO_INTERP0_ACCUM1 (*(volatile uint32_t *)(SIO_BASE + 0x084UL))
+
+#define SIO_INTERP0_BASE0 (*(volatile uint32_t *)(SIO_BASE + 0x088UL))
+
+#define SIO_INTERP0_BASE1 (*(volatile uint32_t *)(SIO_BASE + 0x08CUL))
+
+#define SIO_INTERP0_BASE2 (*(volatile uint32_t *)(SIO_BASE + 0x090UL))
+
+#define SIO_INTERP0_POP_LANE0 (*(volatile uint32_t *)(SIO_BASE + 0x094UL))
+
+#define SIO_INTERP0_POP_LANE1 (*(volatile uint32_t *)(SIO_BASE + 0x098UL))
+
+#define SIO_INTERP0_POP_FULL (*(volatile uint32_t *)(SIO_BASE + 0x09CUL))
+
+#define SIO_INTERP0_PEEK_LANE0 (*(volatile uint32_t *)(SIO_BASE + 0x0A0UL))
+
+#define SIO_INTERP0_PEEK_LANE1 (*(volatile uint32_t *)(SIO_BASE + 0x0A4UL))
+
+#define SIO_INTERP0_PEEK_FULL (*(volatile uint32_t *)(SIO_BASE + 0x0A8UL))
+
+#define SIO_INTERP0_CTRL_LANE0 (*(volatile uint32_t *)(SIO_BASE + 0x0ACUL))
+
+#define SIO_INTERP0_CTRL_LANE1 (*(volatile uint32_t *)(SIO_BASE + 0x0B0UL))
+
+#define SIO_INTERP0_ACCUM0_ADD (*(volatile uint32_t *)(SIO_BASE + 0x0B4UL))
+
+#define SIO_INTERP0_ACCUM1_ADD (*(volatile uint32_t *)(SIO_BASE + 0x0B8UL))
+
+#define SIO_INTERP0_BASE_1AND0 (*(volatile uint32_t *)(SIO_BASE + 0x0BCUL))
+
+#define SIO_INTERP1_ACCUM0 (*(volatile uint32_t *)(SIO_BASE + 0x0C0UL))
+
+#define SIO_INTERP1_ACCUM1 (*(volatile uint32_t *)(SIO_BASE + 0x0C4UL))
+
+#define SIO_INTERP1_BASE0 (*(volatile uint32_t *)(SIO_BASE + 0x0C8UL))
+
+#define SIO_INTERP1_BASE1 (*(volatile uint32_t *)(SIO_BASE + 0x0CCUL))
+
+#define SIO_INTERP1_BASE2 (*(volatile uint32_t *)(SIO_BASE + 0x0D0UL))
+
+#define SIO_INTERP1_POP_LANE0 (*(volatile uint32_t *)(SIO_BASE + 0x0D4UL))
+
+#define SIO_INTERP1_POP_LANE1 (*(volatile uint32_t *)(SIO_BASE + 0x0D8UL))
+
+#define SIO_INTERP1_POP_FULL (*(volatile uint32_t *)(SIO_BASE + 0x0DCUL))
+
+#define SIO_INTERP1_PEEK_LANE0 (*(volatile uint32_t *)(SIO_BASE + 0x0E0UL))
+
+#define SIO_INTERP1_PEEK_LANE1 (*(volatile uint32_t *)(SIO_BASE + 0x0E4UL))
+
+#define SIO_INTERP1_PEEK_FULL (*(volatile uint32_t *)(SIO_BASE + 0x0E8UL))
+
+#define SIO_INTERP1_CTRL_LANE0 (*(volatile uint32_t *)(SIO_BASE + 0x0ECUL))
+
+#define SIO_INTERP1_CTRL_LANE1 (*(volatile uint32_t *)(SIO_BASE + 0x0F0UL))
+
+#define SIO_INTERP1_ACCUM0_ADD (*(volatile uint32_t *)(SIO_BASE + 0x0F4UL))
+
+#define SIO_INTERP1_ACCUM1_ADD (*(volatile uint32_t *)(SIO_BASE + 0x0F8UL))
+
+#define SIO_INTERP1_BASE_1AND0 (*(volatile uint32_t *)(SIO_BASE + 0x0FCUL))
+#define SIO_SPINLOCK0 (*(volatile uint32_t *)(SIO_BASE + 0x100UL))
+#define SIO_SPINLOCK1 (*(volatile uint32_t *)(SIO_BASE + 0x104UL))
+#define SIO_SPINLOCK2 (*(volatile uint32_t *)(SIO_BASE + 0x108UL))
+#define SIO_SPINLOCK3 (*(volatile uint32_t *)(SIO_BASE + 0x10CUL))
+#define SIO_SPINLOCK4 (*(volatile uint32_t *)(SIO_BASE + 0x110UL))
+#define SIO_SPINLOCK5 (*(volatile uint32_t *)(SIO_BASE + 0x114UL))
+#define SIO_SPINLOCK6 (*(volatile uint32_t *)(SIO_BASE + 0x118UL))
+#define SIO_SPINLOCK7 (*(volatile uint32_t *)(SIO_BASE + 0x11CUL))
+
+#define SIO_SPINLOCK8 (*(volatile uint32_t *)(SIO_BASE + 0x120UL))
+#define SIO_SPINLOCK9 (*(volatile uint32_t *)(SIO_BASE + 0x124UL))
+#define SIO_SPINLOCK10 (*(volatile uint32_t *)(SIO_BASE + 0x128UL))
+#define SIO_SPINLOCK11 (*(volatile uint32_t *)(SIO_BASE + 0x12CUL))
+#define SIO_SPINLOCK12 (*(volatile uint32_t *)(SIO_BASE + 0x130UL))
+#define SIO_SPINLOCK13 (*(volatile uint32_t *)(SIO_BASE + 0x134UL))
+#define SIO_SPINLOCK14 (*(volatile uint32_t *)(SIO_BASE + 0x138UL))
+#define SIO_SPINLOCK15 (*(volatile uint32_t *)(SIO_BASE + 0x13CUL))
+
+#define SIO_SPINLOCK16 (*(volatile uint32_t *)(SIO_BASE + 0x140UL))
+#define SIO_SPINLOCK17 (*(volatile uint32_t *)(SIO_BASE + 0x144UL))
+#define SIO_SPINLOCK18 (*(volatile uint32_t *)(SIO_BASE + 0x148UL))
+#define SIO_SPINLOCK19 (*(volatile uint32_t *)(SIO_BASE + 0x14CUL))
+#define SIO_SPINLOCK20 (*(volatile uint32_t *)(SIO_BASE + 0x150UL))
+#define SIO_SPINLOCK21 (*(volatile uint32_t *)(SIO_BASE + 0x154UL))
+#define SIO_SPINLOCK22 (*(volatile uint32_t *)(SIO_BASE + 0x158UL))
+#define SIO_SPINLOCK23 (*(volatile uint32_t *)(SIO_BASE + 0x15CUL))
+
+#define SIO_SPINLOCK24 (*(volatile uint32_t *)(SIO_BASE + 0x160UL))
+#define SIO_SPINLOCK25 (*(volatile uint32_t *)(SIO_BASE + 0x164UL))
+#define SIO_SPINLOCK26 (*(volatile uint32_t *)(SIO_BASE + 0x168UL))
+#define SIO_SPINLOCK27 (*(volatile uint32_t *)(SIO_BASE + 0x16CUL))
+#define SIO_SPINLOCK28 (*(volatile uint32_t *)(SIO_BASE + 0x170UL))
+#define SIO_SPINLOCK29 (*(volatile uint32_t *)(SIO_BASE + 0x174UL))
+#define SIO_SPINLOCK30 (*(volatile uint32_t *)(SIO_BASE + 0x178UL))
+#define SIO_SPINLOCK31 (*(volatile uint32_t *)(SIO_BASE + 0x17CUL))
+
+#define SIO_DOORBELL_OUT_SET (*(volatile uint32_t *)(SIO_BASE + 0x180UL))
+
+#define SIO_DOORBELL_OUT_CLR (*(volatile uint32_t *)(SIO_BASE + 0x184UL))
+
+#define SIO_DOORBELL_IN_SET (*(volatile uint32_t *)(SIO_BASE + 0x188UL))
+
+#define SIO_DOORBELL_IN_CLR (*(volatile uint32_t *)(SIO_BASE + 0x18CUL))
+
+#define SIO_PERI_NONSEC (*(volatile uint32_t *)(SIO_BASE + 0x190UL))
+
+#define SIO_RISCV_SOFTIRQ (*(volatile uint32_t *)(SIO_BASE + 0x1A0UL))
+
+#define SIO_MTIME_CTRL (*(volatile uint32_t *)(SIO_BASE + 0x1A4UL))
+
+#define SIO_MTIME (*(volatile uint32_t *)(SIO_BASE + 0x1B0UL))
+
+#define SIO_MTIMEH (*(volatile uint32_t *)(SIO_BASE + 0x1B4UL))
+
+#define SIO_MTIMECMP (*(volatile uint32_t *)(SIO_BASE + 0x1B8UL))
+
+#define SIO_MTIMECMPH (*(volatile uint32_t *)(SIO_BASE + 0x1BCUL))
+
+#define SIO_TMDS_CTRL (*(volatile uint32_t *)(SIO_BASE + 0x1C0UL))
+
+#define SIO_TMDS_WDATA (*(volatile uint32_t *)(SIO_BASE + 0x1C4UL))
+
+#define SIO_TMDS_PEEK_SINGLE (*(volatile uint32_t *)(SIO_BASE + 0x1C8UL))
+
+#define SIO_TMDS_POP_SINGLE (*(volatile uint32_t *)(SIO_BASE + 0x1CCUL))
+
+#define SIO_TMDS_PEEK_DOUBLE_L0 (*(volatile uint32_t *)(SIO_BASE + 0x1D0UL))
+
+#define SIO_TMDS_POP_DOUBLE_L0 (*(volatile uint32_t *)(SIO_BASE + 0x1D4UL))
+
+#define SIO_TMDS_PEEK_DOUBLE_L1 (*(volatile uint32_t *)(SIO_BASE + 0x1D8UL))
+
+#define SIO_TMDS_POP_DOUBLE_L1 (*(volatile uint32_t *)(SIO_BASE + 0x1DCUL))
+
+#define SIO_TMDS_PEEK_DOUBLE_L2 (*(volatile uint32_t *)(SIO_BASE + 0x1E0UL))
+
+#define SIO_TMDS_POP_DOUBLE_L2 (*(volatile uint32_t *)(SIO_BASE + 0x1E4UL))
+#define SIO_NONSEC_BASE 0xD0020000UL
+#define PPB_BASE 0xE0000000UL
+#define PPB_NONSEC_BASE 0xE0020000UL
+#define EPPB_BASE 0xE0080000UL
+
+#endif
