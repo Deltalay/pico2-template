@@ -303,6 +303,11 @@
 #define PADS_BANK0_SWD (*(volatile uint32_t *)(PADS_BANK0_BASE + 0xC8UL))
 #define PADS_QSPI_BASE 0x40040000UL
 #define XOSC_BASE 0x40048000UL
+#define XOSC_CTRL (*(volatile uint32_t *)(XOSC_BASE + 0x00UL))
+#define XOSC_STATUS (*(volatile uint32_t *)(XOSC_BASE + 0x04UL))
+#define XOSC_DORMANT (*(volatile uint32_t *)(XOSC_BASE + 0x08UL))
+#define XOSC_STARTUP (*(volatile uint32_t *)(XOSC_BASE + 0x0CUL))
+#define XOSC_COUNT (*(volatile uint32_t *)(XOSC_BASE + 0x10UL))
 #define PLL_SYS_BASE 0x40050000UL
 #define PLL_USB_BASE 0x40058000UL
 #define PLL_SYS_CS (*(volatile uint32_t *)(PLL_SYS_BASE + 0x00))
