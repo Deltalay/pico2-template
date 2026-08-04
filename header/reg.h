@@ -1,6 +1,5 @@
 #ifndef REG_H
 #define REG_H
-
 #include <stdint.h>
 #define XIP_BASE 0x10000000UL
 #define XIP_NOCACHE_NOALLOC_BASE 0x14000000UL
@@ -17,6 +16,59 @@
 #define SYSINFO_BASE 0x40000000UL
 #define SYSCFG_BASE 0x40008000UL
 #define CLOCKS_BASE 0x40010000UL
+#define CLK_GPOUT0_CTRL (*(volatile uint32_t *)(CLOCKS_BASE + 0x00))
+#define CLK_GPOUT0_DIV (*(volatile uint32_t *)(CLOCKS_BASE + 0x04))
+#define CLK_GPOUT0_SELECTED (*(volatile uint32_t *)(CLOCKS_BASE + 0x08))
+#define CLK_GPOUT1_CTRL (*(volatile uint32_t *)(CLOCKS_BASE + 0x0C))
+#define CLK_GPOUT1_DIV (*(volatile uint32_t *)(CLOCKS_BASE + 0x10))
+#define CLK_GPOUT1_SELECTED (*(volatile uint32_t *)(CLOCKS_BASE + 0x14))
+#define CLK_GPOUT2_CTRL (*(volatile uint32_t *)(CLOCKS_BASE + 0x18))
+#define CLK_GPOUT2_DIV (*(volatile uint32_t *)(CLOCKS_BASE + 0x1C))
+#define CLK_GPOUT2_SELECTED (*(volatile uint32_t *)(CLOCKS_BASE + 0x20))
+#define CLK_GPOUT3_CTRL (*(volatile uint32_t *)(CLOCKS_BASE + 0x24))
+#define CLK_GPOUT3_DIV (*(volatile uint32_t *)(CLOCKS_BASE + 0x28))
+#define CLK_GPOUT3_SELECTED (*(volatile uint32_t *)(CLOCKS_BASE + 0x2C))
+#define CLK_REF_CTRL (*(volatile uint32_t *)(CLOCKS_BASE + 0x30))
+#define CLK_REF_DIV (*(volatile uint32_t *)(CLOCKS_BASE + 0x34))
+#define CLK_REF_SELECTED (*(volatile uint32_t *)(CLOCKS_BASE + 0x38))
+#define CLK_SYS_CTRL (*(volatile uint32_t *)(CLOCKS_BASE + 0x3C))
+#define CLK_SYS_DIV (*(volatile uint32_t *)(CLOCKS_BASE + 0x40))
+#define CLK_SYS_SELECTED (*(volatile uint32_t *)(CLOCKS_BASE + 0x44))
+#define CLK_PERI_CTRL (*(volatile uint32_t *)(CLOCKS_BASE + 0x48))
+#define CLK_PERI_DIV (*(volatile uint32_t *)(CLOCKS_BASE + 0x4C))
+#define CLK_PERI_SELECTED (*(volatile uint32_t *)(CLOCKS_BASE + 0x50))
+#define CLK_HSTX_CTRL (*(volatile uint32_t *)(CLOCKS_BASE + 0x54))
+#define CLK_HSTX_DIV (*(volatile uint32_t *)(CLOCKS_BASE + 0x58))
+#define CLK_HSTX_SELECTED (*(volatile uint32_t *)(CLOCKS_BASE + 0x5C))
+#define CLK_USB_CTRL (*(volatile uint32_t *)(CLOCKS_BASE + 0x60))
+#define CLK_USB_DIV (*(volatile uint32_t *)(CLOCKS_BASE + 0x64))
+#define CLK_USB_SELECTED (*(volatile uint32_t *)(CLOCKS_BASE + 0x68))
+#define CLK_ADC_CTRL (*(volatile uint32_t *)(CLOCKS_BASE + 0x6C))
+#define CLK_ADC_DIV (*(volatile uint32_t *)(CLOCKS_BASE + 0x70))
+#define CLK_ADC_SELECTED (*(volatile uint32_t *)(CLOCKS_BASE + 0x74))
+#define DFTCLK_XOSC_CTRL (*(volatile uint32_t *)(CLOCKS_BASE + 0x78))
+#define DFTCLK_ROSC_CTRL (*(volatile uint32_t *)(CLOCKS_BASE + 0x7C))
+#define DFTCLK_LPOSC_CTRL (*(volatile uint32_t *)(CLOCKS_BASE + 0x80))
+#define CLK_SYS_RESUS_CTRL (*(volatile uint32_t *)(CLOCKS_BASE + 0x84))
+#define CLK_SYS_RESUS_STATUS (*(volatile uint32_t *)(CLOCKS_BASE + 0x88))
+#define FC0_REF_KHZ (*(volatile uint32_t *)(CLOCKS_BASE + 0x8C))
+#define FC0_MIN_KHZ (*(volatile uint32_t *)(CLOCKS_BASE + 0x90))
+#define FC0_MAX_KHZ (*(volatile uint32_t *)(CLOCKS_BASE + 0x94))
+#define FC0_DELAY (*(volatile uint32_t *)(CLOCKS_BASE + 0x98))
+#define FC0_INTERVAL (*(volatile uint32_t *)(CLOCKS_BASE + 0x9C))
+#define FC0_SRC (*(volatile uint32_t *)(CLOCKS_BASE + 0xA0))
+#define FC0_STATUS (*(volatile uint32_t *)(CLOCKS_BASE + 0xA4))
+#define FC0_RESULT (*(volatile uint32_t *)(CLOCKS_BASE + 0xA8))
+#define WAKE_EN0 (*(volatile uint32_t *)(CLOCKS_BASE + 0xAC))
+#define WAKE_EN1 (*(volatile uint32_t *)(CLOCKS_BASE + 0xB0))
+#define SLEEP_EN0 (*(volatile uint32_t *)(CLOCKS_BASE + 0xB4))
+#define SLEEP_EN1 (*(volatile uint32_t *)(CLOCKS_BASE + 0xB8))
+#define ENABLED0 (*(volatile uint32_t *)(CLOCKS_BASE + 0xBC))
+#define ENABLED1 (*(volatile uint32_t *)(CLOCKS_BASE + 0xC0))
+#define CLOCKS_INTR (*(volatile uint32_t *)(CLOCKS_BASE + 0xC4))
+#define CLOCKS_INTE (*(volatile uint32_t *)(CLOCKS_BASE + 0xC8))
+#define CLOCKS_INTF (*(volatile uint32_t *)(CLOCKS_BASE + 0xCC))
+#define CLOCKS_INTS (*(volatile uint32_t *)(CLOCKS_BASE + 0xD0))
 #define PSM_BASE 0x40018000UL
 #define RESETS_BASE 0x40020000UL
 #define RESETS_RESET (*(volatile uint32_t *)(RESETS_BASE + 0x0UL))
@@ -43,7 +95,6 @@
 #define GPIO8_CTRL (*(volatile uint32_t *)(IO_BANK0_BASE + 0x044UL))
 #define GPIO9_STATUS (*(volatile uint32_t *)(IO_BANK0_BASE + 0x048UL))
 #define GPIO9_CTRL (*(volatile uint32_t *)(IO_BANK0_BASE + 0x04CUL))
-
 #define GPIO10_STATUS (*(volatile uint32_t *)(IO_BANK0_BASE + 0x050UL))
 #define GPIO10_CTRL (*(volatile uint32_t *)(IO_BANK0_BASE + 0x054UL))
 #define GPIO11_STATUS (*(volatile uint32_t *)(IO_BANK0_BASE + 0x058UL))
@@ -56,12 +107,10 @@
 #define GPIO14_CTRL (*(volatile uint32_t *)(IO_BANK0_BASE + 0x074UL))
 #define GPIO15_STATUS (*(volatile uint32_t *)(IO_BANK0_BASE + 0x078UL))
 #define GPIO15_CTRL (*(volatile uint32_t *)(IO_BANK0_BASE + 0x07CUL))
-
 #define GPIO16_STATUS (*(volatile uint32_t *)(IO_BANK0_BASE + 0x080UL))
 #define GPIO16_CTRL (*(volatile uint32_t *)(IO_BANK0_BASE + 0x084UL))
 #define GPIO17_STATUS (*(volatile uint32_t *)(IO_BANK0_BASE + 0x088UL))
 #define GPIO17_CTRL (*(volatile uint32_t *)(IO_BANK0_BASE + 0x08CUL))
-
 #define GPIO18_STATUS (*(volatile uint32_t *)(IO_BANK0_BASE + 0x090UL))
 #define GPIO18_CTRL (*(volatile uint32_t *)(IO_BANK0_BASE + 0x094UL))
 #define GPIO19_STATUS (*(volatile uint32_t *)(IO_BANK0_BASE + 0x098UL))
@@ -90,7 +139,6 @@
 #define GPIO30_CTRL (*(volatile uint32_t *)(IO_BANK0_BASE + 0x0F4UL))
 #define GPIO31_STATUS (*(volatile uint32_t *)(IO_BANK0_BASE + 0x0F8UL))
 #define GPIO31_CTRL (*(volatile uint32_t *)(IO_BANK0_BASE + 0x0FCUL))
-
 #define GPIO32_STATUS (*(volatile uint32_t *)(IO_BANK0_BASE + 0x100UL))
 #define GPIO32_CTRL (*(volatile uint32_t *)(IO_BANK0_BASE + 0x104UL))
 #define GPIO33_STATUS (*(volatile uint32_t *)(IO_BANK0_BASE + 0x108UL))
@@ -123,7 +171,6 @@
 #define GPIO46_CTRL (*(volatile uint32_t *)(IO_BANK0_BASE + 0x174UL))
 #define GPIO47_STATUS (*(volatile uint32_t *)(IO_BANK0_BASE + 0x178UL))
 #define GPIO47_CTRL    (*(volatile uint32_t *)(IO_BANK0_BASE + 0x17CUL)
-
 #define IRQSUMMARY_PROC0_SECURE0                                               \
   (*(volatile uint32_t *)(IO_BANK0_BASE + 0x200UL))
 #define IRQSUMMARY_PROC0_SECURE1                                               \
@@ -132,7 +179,6 @@
   (*(volatile uint32_t *)(IO_BANK0_BASE + 0x208UL))
 #define IRQSUMMARY_PROC0_NONSECURE1                                            \
   (*(volatile uint32_t *)(IO_BANK0_BASE + 0x20CUL))
-
 #define IRQSUMMARY_PROC1_SECURE0                                               \
   (*(volatile uint32_t *)(IO_BANK0_BASE + 0x210UL))
 #define IRQSUMMARY_PROC1_SECURE1                                               \
@@ -141,7 +187,6 @@
   (*(volatile uint32_t *)(IO_BANK0_BASE + 0x218UL))
 #define IRQSUMMARY_PROC1_NONSECURE1                                            \
   (*(volatile uint32_t *)(IO_BANK0_BASE + 0x21CUL))
-
 #define INTR0 (*(volatile uint32_t *)(IO_BANK0_BASE + 0x230UL))
 #define INTR1 (*(volatile uint32_t *)(IO_BANK0_BASE + 0x234UL))
 #define INTR2 (*(volatile uint32_t *)(IO_BANK0_BASE + 0x238UL))
@@ -190,14 +235,12 @@
 #define DORMANT_WAKE_INTE3 (*(volatile uint32_t *)(IO_BANK0_BASE + 0x2E4UL))
 #define DORMANT_WAKE_INTE4 (*(volatile uint32_t *)(IO_BANK0_BASE + 0x2E8UL))
 #define DORMANT_WAKE_INTE5 (*(volatile uint32_t *)(IO_BANK0_BASE + 0x2ECUL))
-
 #define DORMANT_WAKE_INTF0 (*(volatile uint32_t *)(IO_BANK0_BASE + 0x2F0UL))
 #define DORMANT_WAKE_INTF1 (*(volatile uint32_t *)(IO_BANK0_BASE + 0x2F4UL))
 #define DORMANT_WAKE_INTF2 (*(volatile uint32_t *)(IO_BANK0_BASE + 0x2F8UL))
 #define DORMANT_WAKE_INTF3 (*(volatile uint32_t *)(IO_BANK0_BASE + 0x2FCUL))
 #define DORMANT_WAKE_INTF4 (*(volatile uint32_t *)(IO_BANK0_BASE + 0x300UL))
 #define DORMANT_WAKE_INTF5 (*(volatile uint32_t *)(IO_BANK0_BASE + 0x304UL))
-
 #define DORMANT_WAKE_INTS0 (*(volatile uint32_t *)(IO_BANK0_BASE + 0x308UL))
 #define DORMANT_WAKE_INTS1 (*(volatile uint32_t *)(IO_BANK0_BASE + 0x30CUL))
 #define DORMANT_WAKE_INTS2 (*(volatile uint32_t *)(IO_BANK0_BASE + 0x310UL))
@@ -205,13 +248,9 @@
 #define DORMANT_WAKE_INTS4 (*(volatile uint32_t *)(IO_BANK0_BASE + 0x318UL))
 #define DORMANT_WAKE_INTS5 (*(volatile uint32_t *)(IO_BANK0_BASE + 0x31CUL))
 #define IO_QSPI_BASE 0x40030000UL
-
 #define PADS_BANK0_BASE 0x40038000UL
 #define PADS_BANK0_VOLTAGE_SELECT                                              \
   (*(volatile uint32_t *)(PADS_BANK0_BASE + 0x00UL))
-
-/* GPIO PAD CONTROL REGISTERS */
-
 #define PADS_BANK0_GPIO0 (*(volatile uint32_t *)(PADS_BANK0_BASE + 0x04UL))
 #define PADS_BANK0_GPIO1 (*(volatile uint32_t *)(PADS_BANK0_BASE + 0x08UL))
 #define PADS_BANK0_GPIO2 (*(volatile uint32_t *)(PADS_BANK0_BASE + 0x0CUL))
@@ -221,7 +260,6 @@
 #define PADS_BANK0_GPIO6 (*(volatile uint32_t *)(PADS_BANK0_BASE + 0x1CUL))
 #define PADS_BANK0_GPIO7 (*(volatile uint32_t *)(PADS_BANK0_BASE + 0x20UL))
 #define PADS_BANK0_GPIO8 (*(volatile uint32_t *)(PADS_BANK0_BASE + 0x24UL))
-
 #define PADS_BANK0_GPIO9 (*(volatile uint32_t *)(PADS_BANK0_BASE + 0x28UL))
 #define PADS_BANK0_GPIO10 (*(volatile uint32_t *)(PADS_BANK0_BASE + 0x2CUL))
 #define PADS_BANK0_GPIO11 (*(volatile uint32_t *)(PADS_BANK0_BASE + 0x30UL))
@@ -233,7 +271,6 @@
 #define PADS_BANK0_GPIO17 (*(volatile uint32_t *)(PADS_BANK0_BASE + 0x48UL))
 #define PADS_BANK0_GPIO18 (*(volatile uint32_t *)(PADS_BANK0_BASE + 0x4CUL))
 #define PADS_BANK0_GPIO19 (*(volatile uint32_t *)(PADS_BANK0_BASE + 0x50UL))
-
 #define PADS_BANK0_GPIO20 (*(volatile uint32_t *)(PADS_BANK0_BASE + 0x54UL))
 #define PADS_BANK0_GPIO21 (*(volatile uint32_t *)(PADS_BANK0_BASE + 0x58UL))
 #define PADS_BANK0_GPIO22 (*(volatile uint32_t *)(PADS_BANK0_BASE + 0x5CUL))
@@ -244,7 +281,6 @@
 #define PADS_BANK0_GPIO27 (*(volatile uint32_t *)(PADS_BANK0_BASE + 0x70UL))
 #define PADS_BANK0_GPIO28 (*(volatile uint32_t *)(PADS_BANK0_BASE + 0x74UL))
 #define PADS_BANK0_GPIO29 (*(volatile uint32_t *)(PADS_BANK0_BASE + 0x78UL))
-
 #define PADS_BANK0_GPIO30 (*(volatile uint32_t *)(PADS_BANK0_BASE + 0x7CUL))
 #define PADS_BANK0_GPIO31 (*(volatile uint32_t *)(PADS_BANK0_BASE + 0x80UL))
 #define PADS_BANK0_GPIO32 (*(volatile uint32_t *)(PADS_BANK0_BASE + 0x84UL))
@@ -255,7 +291,6 @@
 #define PADS_BANK0_GPIO37 (*(volatile uint32_t *)(PADS_BANK0_BASE + 0x98UL))
 #define PADS_BANK0_GPIO38 (*(volatile uint32_t *)(PADS_BANK0_BASE + 0x9CUL))
 #define PADS_BANK0_GPIO39 (*(volatile uint32_t *)(PADS_BANK0_BASE + 0xA0UL))
-
 #define PADS_BANK0_GPIO40 (*(volatile uint32_t *)(PADS_BANK0_BASE + 0xA4UL))
 #define PADS_BANK0_GPIO41 (*(volatile uint32_t *)(PADS_BANK0_BASE + 0xA8UL))
 #define PADS_BANK0_GPIO42 (*(volatile uint32_t *)(PADS_BANK0_BASE + 0xACUL))
@@ -264,53 +299,50 @@
 #define PADS_BANK0_GPIO45 (*(volatile uint32_t *)(PADS_BANK0_BASE + 0xB8UL))
 #define PADS_BANK0_GPIO46 (*(volatile uint32_t *)(PADS_BANK0_BASE + 0xBCUL))
 #define PADS_BANK0_GPIO47 (*(volatile uint32_t *)(PADS_BANK0_BASE + 0xC0UL))
-
-/* DEBUG PADS */
-
 #define PADS_BANK0_SWCLK (*(volatile uint32_t *)(PADS_BANK0_BASE + 0xC4UL))
-
 #define PADS_BANK0_SWD (*(volatile uint32_t *)(PADS_BANK0_BASE + 0xC8UL))
-
 #define PADS_QSPI_BASE 0x40040000UL
-
 #define XOSC_BASE 0x40048000UL
 #define PLL_SYS_BASE 0x40050000UL
 #define PLL_USB_BASE 0x40058000UL
-
+#define PLL_SYS_CS (*(volatile uint32_t *)(PLL_SYS_BASE + 0x00))
+#define PLL_SYS_PWR (*(volatile uint32_t *)(PLL_SYS_BASE + 0x04))
+#define PLL_SYS_FBDIV_INT (*(volatile uint32_t *)(PLL_SYS_BASE + 0x08))
+#define PLL_SYS_PRIM (*(volatile uint32_t *)(PLL_SYS_BASE + 0x0C))
+#define PLL_SYS_INTR (*(volatile uint32_t *)(PLL_SYS_BASE + 0x10))
+#define PLL_SYS_INTE (*(volatile uint32_t *)(PLL_SYS_BASE + 0x14))
+#define PLL_SYS_INTF (*(volatile uint32_t *)(PLL_SYS_BASE + 0x18))
+#define PLL_SYS_INTS (*(volatile uint32_t *)(PLL_SYS_BASE + 0x1C))
+#define PLL_USB_CS (*(volatile uint32_t *)(PLL_USB_BASE + 0x00))
+#define PLL_USB_PWR (*(volatile uint32_t *)(PLL_USB_BASE + 0x04))
+#define PLL_USB_FBDIV_INT (*(volatile uint32_t *)(PLL_USB_BASE + 0x08))
+#define PLL_USB_PRIM (*(volatile uint32_t *)(PLL_USB_BASE + 0x0C))
+#define PLL_USB_INTR (*(volatile uint32_t *)(PLL_USB_BASE + 0x10))
+#define PLL_USB_INTE (*(volatile uint32_t *)(PLL_USB_BASE + 0x14))
+#define PLL_USB_INTF (*(volatile uint32_t *)(PLL_USB_BASE + 0x18))
+#define PLL_USB_INTS (*(volatile uint32_t *)(PLL_USB_BASE + 0x1C))
 #define ACCESSCTRL_BASE 0x40060000UL
 #define BUSCTRL_BASE 0x40068000UL
-
 #define UART0_BASE 0x40070000UL
 #define UART1_BASE 0x40078000UL
-
 #define SPI0_BASE 0x40080000UL
 #define SPI1_BASE 0x40088000UL
-
 #define I2C0_BASE 0x40090000UL
 #define I2C1_BASE 0x40098000UL
-
 #define ADC_BASE 0x400A0000UL
 #define PWM_BASE 0x400A8000UL
-
 #define TIMER0_BASE 0x400B0000UL
 #define TIMER1_BASE 0x400B8000UL
-
 #define HSTX_CTRL_BASE 0x400C0000UL
-
 #define XIP_CTRL_BASE 0x400C8000UL
 #define XIP_QMI_BASE 0x400D0000UL
-
 #define WATCHDOG_BASE 0x400D8000UL
-
 #define BOOTRAM_BASE 0x400E0000UL
 #define ROSC_BASE 0x400E8000UL
-
 #define TRNG_BASE 0x400F0000UL
 #define SHA256_BASE 0x400F8000UL
-
 #define POWMAN_BASE 0x40100000UL
 #define TICKS_BASE 0x40108000UL
-
 #define OTP_BASE 0x40120000UL
 #define OTP_DATA_BASE 0x40130000UL
 #define OTP_DATA_RAW_BASE 0x40134000UL
@@ -325,133 +357,73 @@
 #define CORESIGHT_TPIU_BASE 0x40148000UL
 #define CORESIGHT_CTI_BASE 0x40149000UL
 #define CORESIGHT_APB_AP_RISCV_BASE 0x4014A000UL
-
 #define GLITCH_DETECTOR_BASE 0x40158000UL
 #define TBMAN_BASE 0x40160000UL
 #define DMA_BASE 0x50000000UL
-
 #define USBCTRL_BASE 0x50100000UL
 #define USBCTRL_DPRAM_BASE 0x50100000UL
 #define USBCTRL_REGS_BASE 0x50110000UL
-
 #define PIO0_BASE 0x50200000UL
 #define PIO1_BASE 0x50300000UL
 #define PIO2_BASE 0x50400000UL
-
 #define XIP_AUX_BASE 0x50500000UL
-
 #define HSTX_FIFO_BASE 0x50600000UL
-
 #define CORESIGHT_TRACE_BASE 0x50700000UL
 #define SIO_BASE 0xD0000000UL
 #define SIO_CPUID (*(volatile uint32_t *)(SIO_BASE + 0x000UL))
-
 #define SIO_GPIO_IN (*(volatile uint32_t *)(SIO_BASE + 0x004UL))
-
 #define SIO_GPIO_HI_IN (*(volatile uint32_t *)(SIO_BASE + 0x008UL))
-
 #define SIO_GPIO_OUT (*(volatile uint32_t *)(SIO_BASE + 0x010UL))
-
 #define SIO_GPIO_HI_OUT (*(volatile uint32_t *)(SIO_BASE + 0x014UL))
-
 #define SIO_GPIO_OUT_SET (*(volatile uint32_t *)(SIO_BASE + 0x018UL))
-
 #define SIO_GPIO_HI_OUT_SET (*(volatile uint32_t *)(SIO_BASE + 0x01CUL))
-
 #define SIO_GPIO_OUT_CLR (*(volatile uint32_t *)(SIO_BASE + 0x020UL))
-
 #define SIO_GPIO_HI_OUT_CLR (*(volatile uint32_t *)(SIO_BASE + 0x024UL))
-
 #define SIO_GPIO_OUT_XOR (*(volatile uint32_t *)(SIO_BASE + 0x028UL))
-
 #define SIO_GPIO_HI_OUT_XOR (*(volatile uint32_t *)(SIO_BASE + 0x02CUL))
-
 #define SIO_GPIO_OE (*(volatile uint32_t *)(SIO_BASE + 0x030UL))
-
 #define SIO_GPIO_HI_OE (*(volatile uint32_t *)(SIO_BASE + 0x034UL))
-
 #define SIO_GPIO_OE_SET (*(volatile uint32_t *)(SIO_BASE + 0x038UL))
-
 #define SIO_GPIO_HI_OE_SET (*(volatile uint32_t *)(SIO_BASE + 0x03CUL))
-
 #define SIO_GPIO_OE_CLR (*(volatile uint32_t *)(SIO_BASE + 0x040UL))
-
 #define SIO_GPIO_HI_OE_CLR (*(volatile uint32_t *)(SIO_BASE + 0x044UL))
-
 #define SIO_GPIO_OE_XOR (*(volatile uint32_t *)(SIO_BASE + 0x048UL))
-
 #define SIO_GPIO_HI_OE_XOR (*(volatile uint32_t *)(SIO_BASE + 0x04CUL))
-
 #define SIO_FIFO_ST (*(volatile uint32_t *)(SIO_BASE + 0x050UL))
-
 #define SIO_FIFO_WR (*(volatile uint32_t *)(SIO_BASE + 0x054UL))
-
 #define SIO_FIFO_RD (*(volatile uint32_t *)(SIO_BASE + 0x058UL))
-
 #define SIO_SPINLOCK_ST (*(volatile uint32_t *)(SIO_BASE + 0x05CUL))
-
 #define SIO_INTERP0_ACCUM0 (*(volatile uint32_t *)(SIO_BASE + 0x080UL))
-
 #define SIO_INTERP0_ACCUM1 (*(volatile uint32_t *)(SIO_BASE + 0x084UL))
-
 #define SIO_INTERP0_BASE0 (*(volatile uint32_t *)(SIO_BASE + 0x088UL))
-
 #define SIO_INTERP0_BASE1 (*(volatile uint32_t *)(SIO_BASE + 0x08CUL))
-
 #define SIO_INTERP0_BASE2 (*(volatile uint32_t *)(SIO_BASE + 0x090UL))
-
 #define SIO_INTERP0_POP_LANE0 (*(volatile uint32_t *)(SIO_BASE + 0x094UL))
-
 #define SIO_INTERP0_POP_LANE1 (*(volatile uint32_t *)(SIO_BASE + 0x098UL))
-
 #define SIO_INTERP0_POP_FULL (*(volatile uint32_t *)(SIO_BASE + 0x09CUL))
-
 #define SIO_INTERP0_PEEK_LANE0 (*(volatile uint32_t *)(SIO_BASE + 0x0A0UL))
-
 #define SIO_INTERP0_PEEK_LANE1 (*(volatile uint32_t *)(SIO_BASE + 0x0A4UL))
-
 #define SIO_INTERP0_PEEK_FULL (*(volatile uint32_t *)(SIO_BASE + 0x0A8UL))
-
 #define SIO_INTERP0_CTRL_LANE0 (*(volatile uint32_t *)(SIO_BASE + 0x0ACUL))
-
 #define SIO_INTERP0_CTRL_LANE1 (*(volatile uint32_t *)(SIO_BASE + 0x0B0UL))
-
 #define SIO_INTERP0_ACCUM0_ADD (*(volatile uint32_t *)(SIO_BASE + 0x0B4UL))
-
 #define SIO_INTERP0_ACCUM1_ADD (*(volatile uint32_t *)(SIO_BASE + 0x0B8UL))
-
 #define SIO_INTERP0_BASE_1AND0 (*(volatile uint32_t *)(SIO_BASE + 0x0BCUL))
-
 #define SIO_INTERP1_ACCUM0 (*(volatile uint32_t *)(SIO_BASE + 0x0C0UL))
-
 #define SIO_INTERP1_ACCUM1 (*(volatile uint32_t *)(SIO_BASE + 0x0C4UL))
-
 #define SIO_INTERP1_BASE0 (*(volatile uint32_t *)(SIO_BASE + 0x0C8UL))
-
 #define SIO_INTERP1_BASE1 (*(volatile uint32_t *)(SIO_BASE + 0x0CCUL))
-
 #define SIO_INTERP1_BASE2 (*(volatile uint32_t *)(SIO_BASE + 0x0D0UL))
-
 #define SIO_INTERP1_POP_LANE0 (*(volatile uint32_t *)(SIO_BASE + 0x0D4UL))
-
 #define SIO_INTERP1_POP_LANE1 (*(volatile uint32_t *)(SIO_BASE + 0x0D8UL))
-
 #define SIO_INTERP1_POP_FULL (*(volatile uint32_t *)(SIO_BASE + 0x0DCUL))
-
 #define SIO_INTERP1_PEEK_LANE0 (*(volatile uint32_t *)(SIO_BASE + 0x0E0UL))
-
 #define SIO_INTERP1_PEEK_LANE1 (*(volatile uint32_t *)(SIO_BASE + 0x0E4UL))
-
 #define SIO_INTERP1_PEEK_FULL (*(volatile uint32_t *)(SIO_BASE + 0x0E8UL))
-
 #define SIO_INTERP1_CTRL_LANE0 (*(volatile uint32_t *)(SIO_BASE + 0x0ECUL))
-
 #define SIO_INTERP1_CTRL_LANE1 (*(volatile uint32_t *)(SIO_BASE + 0x0F0UL))
-
 #define SIO_INTERP1_ACCUM0_ADD (*(volatile uint32_t *)(SIO_BASE + 0x0F4UL))
-
 #define SIO_INTERP1_ACCUM1_ADD (*(volatile uint32_t *)(SIO_BASE + 0x0F8UL))
-
 #define SIO_INTERP1_BASE_1AND0 (*(volatile uint32_t *)(SIO_BASE + 0x0FCUL))
 #define SIO_SPINLOCK0 (*(volatile uint32_t *)(SIO_BASE + 0x100UL))
 #define SIO_SPINLOCK1 (*(volatile uint32_t *)(SIO_BASE + 0x104UL))
@@ -461,7 +433,6 @@
 #define SIO_SPINLOCK5 (*(volatile uint32_t *)(SIO_BASE + 0x114UL))
 #define SIO_SPINLOCK6 (*(volatile uint32_t *)(SIO_BASE + 0x118UL))
 #define SIO_SPINLOCK7 (*(volatile uint32_t *)(SIO_BASE + 0x11CUL))
-
 #define SIO_SPINLOCK8 (*(volatile uint32_t *)(SIO_BASE + 0x120UL))
 #define SIO_SPINLOCK9 (*(volatile uint32_t *)(SIO_BASE + 0x124UL))
 #define SIO_SPINLOCK10 (*(volatile uint32_t *)(SIO_BASE + 0x128UL))
@@ -470,7 +441,6 @@
 #define SIO_SPINLOCK13 (*(volatile uint32_t *)(SIO_BASE + 0x134UL))
 #define SIO_SPINLOCK14 (*(volatile uint32_t *)(SIO_BASE + 0x138UL))
 #define SIO_SPINLOCK15 (*(volatile uint32_t *)(SIO_BASE + 0x13CUL))
-
 #define SIO_SPINLOCK16 (*(volatile uint32_t *)(SIO_BASE + 0x140UL))
 #define SIO_SPINLOCK17 (*(volatile uint32_t *)(SIO_BASE + 0x144UL))
 #define SIO_SPINLOCK18 (*(volatile uint32_t *)(SIO_BASE + 0x148UL))
@@ -479,7 +449,6 @@
 #define SIO_SPINLOCK21 (*(volatile uint32_t *)(SIO_BASE + 0x154UL))
 #define SIO_SPINLOCK22 (*(volatile uint32_t *)(SIO_BASE + 0x158UL))
 #define SIO_SPINLOCK23 (*(volatile uint32_t *)(SIO_BASE + 0x15CUL))
-
 #define SIO_SPINLOCK24 (*(volatile uint32_t *)(SIO_BASE + 0x160UL))
 #define SIO_SPINLOCK25 (*(volatile uint32_t *)(SIO_BASE + 0x164UL))
 #define SIO_SPINLOCK26 (*(volatile uint32_t *)(SIO_BASE + 0x168UL))
@@ -488,47 +457,26 @@
 #define SIO_SPINLOCK29 (*(volatile uint32_t *)(SIO_BASE + 0x174UL))
 #define SIO_SPINLOCK30 (*(volatile uint32_t *)(SIO_BASE + 0x178UL))
 #define SIO_SPINLOCK31 (*(volatile uint32_t *)(SIO_BASE + 0x17CUL))
-
 #define SIO_DOORBELL_OUT_SET (*(volatile uint32_t *)(SIO_BASE + 0x180UL))
-
 #define SIO_DOORBELL_OUT_CLR (*(volatile uint32_t *)(SIO_BASE + 0x184UL))
-
 #define SIO_DOORBELL_IN_SET (*(volatile uint32_t *)(SIO_BASE + 0x188UL))
-
 #define SIO_DOORBELL_IN_CLR (*(volatile uint32_t *)(SIO_BASE + 0x18CUL))
-
 #define SIO_PERI_NONSEC (*(volatile uint32_t *)(SIO_BASE + 0x190UL))
-
 #define SIO_RISCV_SOFTIRQ (*(volatile uint32_t *)(SIO_BASE + 0x1A0UL))
-
 #define SIO_MTIME_CTRL (*(volatile uint32_t *)(SIO_BASE + 0x1A4UL))
-
 #define SIO_MTIME (*(volatile uint32_t *)(SIO_BASE + 0x1B0UL))
-
 #define SIO_MTIMEH (*(volatile uint32_t *)(SIO_BASE + 0x1B4UL))
-
 #define SIO_MTIMECMP (*(volatile uint32_t *)(SIO_BASE + 0x1B8UL))
-
 #define SIO_MTIMECMPH (*(volatile uint32_t *)(SIO_BASE + 0x1BCUL))
-
 #define SIO_TMDS_CTRL (*(volatile uint32_t *)(SIO_BASE + 0x1C0UL))
-
 #define SIO_TMDS_WDATA (*(volatile uint32_t *)(SIO_BASE + 0x1C4UL))
-
 #define SIO_TMDS_PEEK_SINGLE (*(volatile uint32_t *)(SIO_BASE + 0x1C8UL))
-
 #define SIO_TMDS_POP_SINGLE (*(volatile uint32_t *)(SIO_BASE + 0x1CCUL))
-
 #define SIO_TMDS_PEEK_DOUBLE_L0 (*(volatile uint32_t *)(SIO_BASE + 0x1D0UL))
-
 #define SIO_TMDS_POP_DOUBLE_L0 (*(volatile uint32_t *)(SIO_BASE + 0x1D4UL))
-
 #define SIO_TMDS_PEEK_DOUBLE_L1 (*(volatile uint32_t *)(SIO_BASE + 0x1D8UL))
-
 #define SIO_TMDS_POP_DOUBLE_L1 (*(volatile uint32_t *)(SIO_BASE + 0x1DCUL))
-
 #define SIO_TMDS_PEEK_DOUBLE_L2 (*(volatile uint32_t *)(SIO_BASE + 0x1E0UL))
-
 #define SIO_TMDS_POP_DOUBLE_L2 (*(volatile uint32_t *)(SIO_BASE + 0x1E4UL))
 #define SIO_NONSEC_BASE 0xD0020000UL
 #define PPB_BASE 0xE0000000UL
