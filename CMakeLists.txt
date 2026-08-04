@@ -13,18 +13,20 @@ file(GLOB SRC_FILES
     "src/*.c"
 )
 set(SOURCE
-    init.c
     ${SRC_FILES}
+    arch/arm/vector_table.S
+    arch/arm/startup.S
 )
 
 set(COMMON_FLAGS "-mcpu=cortex-m33 -mthumb -ffreestanding")
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${COMMON_FLAGS}")
 set(CMAKE_ASM_FLAGS "${CMAKE_ASM_FLAGS} ${COMMON_FLAGS}")
 
-add_executable(${TARGET_NAME} ${SOURCE} startup.s)
+add_executable(${TARGET_NAME} ${SOURCE})
 target_link_options(${TARGET_NAME} PRIVATE
     -nostdlib
     -nostartfiles
+    -O2
     -T ${CMAKE_CURRENT_SOURCE_DIR}/linker.ld
     -Wl,-Map=${TARGET_NAME}.map
     -Wl,--gc-sections

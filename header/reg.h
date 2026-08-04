@@ -19,9 +19,9 @@
 #define CLOCKS_BASE 0x40010000UL
 #define PSM_BASE 0x40018000UL
 #define RESETS_BASE 0x40020000UL
-#define RESETS_RESET (*(volatile uint32_t *)(RESETS_BASE + 0x0000UL))
-#define RESETS_WDSEL (*(volatile uint32_t *)(RESETS_BASE + 0x0004UL))
-#define RESETS_RESET_DONE (*(volatile uint32_t *)(RESETS_BASE + 0x0008UL))
+#define RESETS_RESET (*(volatile uint32_t *)(RESETS_BASE + 0x0UL))
+#define RESETS_WDSEL (*(volatile uint32_t *)(RESETS_BASE + 0x4UL))
+#define RESETS_RESET_DONE (*(volatile uint32_t *)(RESETS_BASE + 0x8UL))
 #define IO_BANK0_BASE 0x40028000UL
 #define GPIO0_STATUS (*(volatile uint32_t *)(IO_BANK0_BASE + 0x000UL))
 #define GPIO0_CTRL (*(volatile uint32_t *)(IO_BANK0_BASE + 0x004UL))
