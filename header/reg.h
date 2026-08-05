@@ -338,6 +338,44 @@
 #define PWM_BASE 0x400A8000UL
 #define TIMER0_BASE 0x400B0000UL
 #define TIMER1_BASE 0x400B8000UL
+#define TIMER0_TIMEHW (*(volatile uint32_t *)(TIMER0_BASE + 0x000UL))
+#define TIMER0_TIMELW (*(volatile uint32_t *)(TIMER0_BASE + 0x004UL))
+#define TIMER0_TIMEHR (*(volatile uint32_t *)(TIMER0_BASE + 0x008UL))
+#define TIMER0_TIMELR (*(volatile uint32_t *)(TIMER0_BASE + 0x00CUL))
+#define TIMER0_ALARM0 (*(volatile uint32_t *)(TIMER0_BASE + 0x010UL))
+#define TIMER0_ALARM1 (*(volatile uint32_t *)(TIMER0_BASE + 0x014UL))
+#define TIMER0_ALARM2 (*(volatile uint32_t *)(TIMER0_BASE + 0x018UL))
+#define TIMER0_ALARM3 (*(volatile uint32_t *)(TIMER0_BASE + 0x01CUL))
+#define TIMER0_ARMED (*(volatile uint32_t *)(TIMER0_BASE + 0x020UL))
+#define TIMER0_TIMERAWH (*(volatile uint32_t *)(TIMER0_BASE + 0x024UL))
+#define TIMER0_TIMERAWL (*(volatile uint32_t *)(TIMER0_BASE + 0x028UL))
+#define TIMER0_DBGPAUSE (*(volatile uint32_t *)(TIMER0_BASE + 0x02CUL))
+#define TIMER0_PAUSE (*(volatile uint32_t *)(TIMER0_BASE + 0x030UL))
+#define TIMER0_LOCKED (*(volatile uint32_t *)(TIMER0_BASE + 0x034UL))
+#define TIMER0_SOURCE (*(volatile uint32_t *)(TIMER0_BASE + 0x038UL))
+#define TIMER0_INTR (*(volatile uint32_t *)(TIMER0_BASE + 0x03CUL))
+#define TIMER0_INTE (*(volatile uint32_t *)(TIMER0_BASE + 0x040UL))
+#define TIMER0_INTF (*(volatile uint32_t *)(TIMER0_BASE + 0x044UL))
+#define TIMER0_INTS (*(volatile uint32_t *)(TIMER0_BASE + 0x048UL))
+#define TIMER1_TIMEHW (*(volatile uint32_t *)(TIMER1_BASE + 0x000UL))
+#define TIMER1_TIMELW (*(volatile uint32_t *)(TIMER1_BASE + 0x004UL))
+#define TIMER1_TIMEHR (*(volatile uint32_t *)(TIMER1_BASE + 0x008UL))
+#define TIMER1_TIMELR (*(volatile uint32_t *)(TIMER1_BASE + 0x00CUL))
+#define TIMER1_ALARM0 (*(volatile uint32_t *)(TIMER1_BASE + 0x010UL))
+#define TIMER1_ALARM1 (*(volatile uint32_t *)(TIMER1_BASE + 0x014UL))
+#define TIMER1_ALARM2 (*(volatile uint32_t *)(TIMER1_BASE + 0x018UL))
+#define TIMER1_ALARM3 (*(volatile uint32_t *)(TIMER1_BASE + 0x01CUL))
+#define TIMER1_ARMED (*(volatile uint32_t *)(TIMER1_BASE + 0x020UL))
+#define TIMER1_TIMERAWH (*(volatile uint32_t *)(TIMER1_BASE + 0x024UL))
+#define TIMER1_TIMERAWL (*(volatile uint32_t *)(TIMER1_BASE + 0x028UL))
+#define TIMER1_DBGPAUSE (*(volatile uint32_t *)(TIMER1_BASE + 0x02CUL))
+#define TIMER1_PAUSE (*(volatile uint32_t *)(TIMER1_BASE + 0x030UL))
+#define TIMER1_LOCKED (*(volatile uint32_t *)(TIMER1_BASE + 0x034UL))
+#define TIMER1_SOURCE (*(volatile uint32_t *)(TIMER1_BASE + 0x038UL))
+#define TIMER1_INTR (*(volatile uint32_t *)(TIMER1_BASE + 0x03CUL))
+#define TIMER1_INTE (*(volatile uint32_t *)(TIMER1_BASE + 0x040UL))
+#define TIMER1_INTF (*(volatile uint32_t *)(TIMER1_BASE + 0x044UL))
+#define TIMER1_INTS (*(volatile uint32_t *)(TIMER1_BASE + 0x048UL))
 #define HSTX_CTRL_BASE 0x400C0000UL
 #define XIP_CTRL_BASE 0x400C8000UL
 #define XIP_QMI_BASE 0x400D0000UL
@@ -348,6 +386,24 @@
 #define SHA256_BASE 0x400F8000UL
 #define POWMAN_BASE 0x40100000UL
 #define TICKS_BASE 0x40108000UL
+#define TICKS_PROC0_CTRL (*(volatile uint32_t *)(TICKS_BASE + 0x000UL))
+#define TICKS_PROC0_CYCLES (*(volatile uint32_t *)(TICKS_BASE + 0x004UL))
+#define TICKS_PROC0_COUNT (*(volatile uint32_t *)(TICKS_BASE + 0x008UL))
+#define TICKS_PROC1_CTRL (*(volatile uint32_t *)(TICKS_BASE + 0x00CUL))
+#define TICKS_PROC1_CYCLES (*(volatile uint32_t *)(TICKS_BASE + 0x010UL))
+#define TICKS_PROC1_COUNT (*(volatile uint32_t *)(TICKS_BASE + 0x014UL))
+#define TICKS_TIMER0_CTRL (*(volatile uint32_t *)(TICKS_BASE + 0x018UL))
+#define TICKS_TIMER0_CYCLES (*(volatile uint32_t *)(TICKS_BASE + 0x01CUL))
+#define TICKS_TIMER0_COUNT (*(volatile uint32_t *)(TICKS_BASE + 0x020UL))
+#define TICKS_TIMER1_CTRL (*(volatile uint32_t *)(TICKS_BASE + 0x024UL))
+#define TICKS_TIMER1_CYCLES (*(volatile uint32_t *)(TICKS_BASE + 0x028UL))
+#define TICKS_TIMER1_COUNT (*(volatile uint32_t *)(TICKS_BASE + 0x02CUL))
+#define TICKS_WATCHDOG_CTRL (*(volatile uint32_t *)(TICKS_BASE + 0x030UL))
+#define TICKS_WATCHDOG_CYCLES (*(volatile uint32_t *)(TICKS_BASE + 0x034UL))
+#define TICKS_WATCHDOG_COUNT (*(volatile uint32_t *)(TICKS_BASE + 0x038UL))
+#define TICKS_RISCV_CTRL (*(volatile uint32_t *)(TICKS_BASE + 0x03CUL))
+#define TICKS_RISCV_CYCLES (*(volatile uint32_t *)(TICKS_BASE + 0x040UL))
+#define TICKS_RISCV_COUNT (*(volatile uint32_t *)(TICKS_BASE + 0x044UL))
 #define OTP_BASE 0x40120000UL
 #define OTP_DATA_BASE 0x40130000UL
 #define OTP_DATA_RAW_BASE 0x40134000UL

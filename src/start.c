@@ -1,5 +1,5 @@
 #include "../header/reg.h"
-
+#include "../header/timer.h"
 /*
  REFDIV:    1
  FBDIV:     125
@@ -37,6 +37,13 @@ void run_150mhz() {
   CLK_SYS_CTRL &= ~(7 << 5);
   CLK_SYS_CTRL |= (0 << 5);
   CLK_SYS_CTRL |= (1 << 0);
+  TIMER0_SOURCE = 0;
+  TICKS_TIMER0_CTRL &= ~1;
+  TICKS_TIMER0_CYCLES = 12;
+  TICKS_TIMER0_CTRL |= 1;
+  while (!(TICKS_TIMER0_CTRL & (1 << 1))) {
+  }
+  
 }
 void _start(void) {
   run_150mhz();
@@ -52,8 +59,7 @@ void _start(void) {
   SIO_GPIO_OE_SET = (1 << 25);
   SIO_GPIO_OUT_XOR = (1 << 25);
   while (1) {
-    for (volatile int i = 0; i < 1000000; i++) {
-    }
+    delay_s(2);
     SIO_GPIO_OUT_XOR = (1 << 25);
   }
 }
