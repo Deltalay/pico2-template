@@ -12,7 +12,7 @@ uint64_t get_time(void) {
 
   return ((uint64_t)high1 << 32) | low;
 }
-void delay_us(uint32_t us) {
+void delay_us(uint64_t us) {
   uint64_t start = get_time();
 
   while ((get_time() - start) < us) {
