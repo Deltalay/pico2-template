@@ -9,11 +9,11 @@ set(CMAKE_TRY_COMPILE_TARGET_TYPE STATIC_LIBRARY)
 project(RP2350_BareMetal C ASM)
 set(CMAKE_EXECUTABLE_SUFFIX ".elf")
 set(TARGET_NAME template)
-file(GLOB SRC_FILES
-    "src/*.c"
-)
+
 set(SOURCE
-    ${SRC_FILES}
+    src/start.c
+    src/timer.c
+    src/gpio.c
     arch/arm/vector_table.S
     arch/arm/startup.S
 )
@@ -23,10 +23,18 @@ set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${COMMON_FLAGS}")
 set(CMAKE_ASM_FLAGS "${CMAKE_ASM_FLAGS} ${COMMON_FLAGS}")
 
 add_executable(${TARGET_NAME} ${SOURCE})
+target_compile_options(${TARGET_NAME} PRIVATE
+    -Os
+    -ffunction-sections
+    -fdata-sections
+    -Wall
+    -Wextra
+    -Wshadow
+    -Wundef
+)
 target_link_options(${TARGET_NAME} PRIVATE
     -nostdlib
     -nostartfiles
-    -O2
     -T ${CMAKE_CURRENT_SOURCE_DIR}/linker.ld
     -Wl,-Map=${TARGET_NAME}.map
     -Wl,--gc-sections
