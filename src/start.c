@@ -1,5 +1,7 @@
+#include "../header/pwm.h"
 #include "../header/reg.h"
 #include "../header/timer.h"
+
 /*
  REFDIV:    1
  FBDIV:     125
@@ -7,7 +9,10 @@
  PD1:       5
  PD2:       2
  */
-void run_150mhz() {
+void init() {
+  SCB_CPACR |= (0xF << 20); // enable CP10 and CP11
+  __asm volatile("dsb");
+  __asm volatile("isb");
   XOSC_CTRL &= ~(0xFFF << 12);
   XOSC_CTRL |= (0xFAB << 12) | 0xAA0;
 
@@ -43,23 +48,40 @@ void run_150mhz() {
   TICKS_TIMER0_CTRL |= 1;
   while (!(TICKS_TIMER0_CTRL & (1 << 1))) {
   }
-  
 }
 void _start(void) {
-  run_150mhz();
-  RESETS_RESET &= ~((1u << 6) | (1U << 9));
-  while ((RESETS_RESET_DONE & ((1u << 6) | (1u << 9))) !=
-         ((1u << 6) | (1u << 9))) {
-  }
-  GPIO25_CTRL &= ~(0x1F);
-  GPIO25_CTRL |= (0x05);
-  PADS_BANK0_GPIO25 |= (3 << 4);
-  PADS_BANK0_GPIO25 |= (1 << 2);
-  PADS_BANK0_GPIO25 &= ~(1 << 8);
-  SIO_GPIO_OE_SET = (1 << 25);
-  SIO_GPIO_OUT_XOR = (1 << 25);
+  init();
+  // RESETS_RESET &= ~((1u << 6) | (1U << 9));
+  // while ((RESETS_RESET_DONE & ((1u << 6) | (1u << 9))) !=
+  //        ((1u << 6) | (1u << 9))) {
+  // }
+  // GPIO25_CTRL &= ~(0x1F);
+  // GPIO25_CTRL |= (0x05);
+  // PADS_BANK0_GPIO25 |= (3 << 4);
+  // PADS_BANK0_GPIO25 |= (1 << 2);
+  // PADS_BANK0_GPIO25 &= ~(1 << 8);
+  // SIO_GPIO_OE_SET = (1 << 25);
+  // SIO_GPIO_OUT_XOR = (1 << 25);
+  // while (1) {
+  //   delay_s(2);
+  //   SIO_GPIO_OUT_XOR = (1 << 25);
+  // }
+  pwm_init();
+  pwm_set(25);
+  uint8_t percentage = 0;
+  int8_t direction = 1;
+
   while (1) {
-    delay_s(2);
-    SIO_GPIO_OUT_XOR = (1 << 25);
+    pwm_duty(25, percentage);
+
+    percentage += direction;
+
+    if (percentage == 100) {
+      direction = -1;
+    } else if (percentage == 0) {
+      direction = 1;
+    }
+
+    delay_ms(20);
   }
 }

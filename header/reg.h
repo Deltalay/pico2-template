@@ -1,6 +1,12 @@
 #ifndef REG_H
 #define REG_H
 #include <stdint.h>
+// ARM
+#define SCB_CPACR (*(volatile uint32_t *)0xE000ED88)
+
+
+
+// PI
 #define XIP_BASE 0x10000000UL
 #define XIP_NOCACHE_NOALLOC_BASE 0x14000000UL
 #define XIP_MAINTENANCE_BASE 0x18000000UL
