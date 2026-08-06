@@ -14,6 +14,7 @@ set(SOURCE
     src/start.c
     src/timer.c
     src/gpio.c
+    src/pwm.c
     arch/arm/vector_table.S
     arch/arm/startup.S
 )
