@@ -12,9 +12,9 @@ set(TARGET_NAME template)
 
 set(SOURCE
     src/start.c
-    src/timer.c
-    src/gpio.c
-    src/pwm.c
+    drivers/timer.c
+    drivers/gpio.c
+    drivers/pwm.c
     arch/arm/vector_table.S
     arch/arm/startup.S
 )

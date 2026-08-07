@@ -1,7 +1,7 @@
 #include "../header/pwm.h"
 #include "../header/reg.h"
 #include "../header/timer.h"
-
+#include "../header/uart.h"
 /*
  REFDIV:    1
  FBDIV:     125
