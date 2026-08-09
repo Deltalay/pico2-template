@@ -5,4 +5,7 @@ void usb_init()
 {
     
 }
-voind 
+void usbctrl_irq()
+{
+    
+}

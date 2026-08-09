@@ -14,6 +14,8 @@ set(SOURCE
     src/start.c
     drivers/timer.c
     drivers/gpio.c
+    drivers/usb.c
+    drivers/uart.c
     drivers/pwm.c
     arch/arm/vector_table.S
     arch/arm/startup.S
