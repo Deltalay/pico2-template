@@ -10,6 +10,7 @@
 .extern _sbss
 .extern _ebss
 .extern _start
+.extern usbctrl_irq
 .section .vectors, "a", %progbits
 .type vector_table, %object
 vector_table:
@@ -27,6 +28,59 @@ vector_table:
     .word Default_Handler
     .word 0
     .word 0
+    .word Default_Handler
+    .word Default_Handler
+    /* RP2350 IRQ */
+    .word Default_Handler
+    .word Default_Handler
+    .word Default_Handler
+    .word Default_Handler
+    .word Default_Handler
+    .word Default_Handler
+    .word Default_Handler
+    .word Default_Handler
+    .word Default_Handler
+    .word Default_Handler
+    .word Default_Handler
+    .word Default_Handler
+    .word Default_Handler
+    .word Default_Handler
+    .word usbctrl_irq
+    .word Default_Handler
+    .word Default_Handler
+    .word Default_Handler
+    .word Default_Handler
+    .word Default_Handler
+    .word Default_Handler
+    .word Default_Handler
+    .word Default_Handler
+    .word Default_Handler
+    .word Default_Handler
+    .word Default_Handler
+    .word Default_Handler
+    .word Default_Handler
+    .word Default_Handler
+    .word Default_Handler
+    .word Default_Handler
+    .word Default_Handler
+    .word Default_Handler
+    .word Default_Handler
+    .word Default_Handler
+    .word Default_Handler
+    .word Default_Handler
+    .word Default_Handler
+    .word Default_Handler
+    .word Default_Handler
+    .word Default_Handler
+    .word Default_Handler
+    .word Default_Handler
+    .word Default_Handler
+    .word Default_Handler
+    .word Default_Handler
+    .word Default_Handler
+    .word Default_Handler
+    .word Default_Handler
+    .word Default_Handler
     .word Default_Handler
     .word Default_Handler
 

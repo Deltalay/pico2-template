@@ -51,6 +51,7 @@ void init() {
 }
 void _start(void) {
   init();
+  uart0_init(115200);
   // RESETS_RESET &= ~((1u << 6) | (1U << 9));
   // while ((RESETS_RESET_DONE & ((1u << 6) | (1u << 9))) !=
   //        ((1u << 6) | (1u << 9))) {

@@ -542,6 +542,57 @@
 #define TBMAN_BASE 0x40160000UL
 #define DMA_BASE 0x50000000UL
 #define USBCTRL_BASE 0x50100000UL
+#define USBCTRL_ADDR_ENDP (*(volatile uint32_t *)(USBCTRL_BASE + 0x000UL))
+#define USBCTRL_ADDR_ENDP1 (*(volatile uint32_t *)(USBCTRL_BASE + 0x004UL))
+#define USBCTRL_ADDR_ENDP2 (*(volatile uint32_t *)(USBCTRL_BASE + 0x008UL))
+#define USBCTRL_ADDR_ENDP3 (*(volatile uint32_t *)(USBCTRL_BASE + 0x00CUL))
+#define USBCTRL_ADDR_ENDP4 (*(volatile uint32_t *)(USBCTRL_BASE + 0x010UL))
+#define USBCTRL_ADDR_ENDP5 (*(volatile uint32_t *)(USBCTRL_BASE + 0x014UL))
+#define USBCTRL_ADDR_ENDP6 (*(volatile uint32_t *)(USBCTRL_BASE + 0x018UL))
+#define USBCTRL_ADDR_ENDP7 (*(volatile uint32_t *)(USBCTRL_BASE + 0x01CUL))
+#define USBCTRL_ADDR_ENDP8 (*(volatile uint32_t *)(USBCTRL_BASE + 0x020UL))
+#define USBCTRL_ADDR_ENDP9 (*(volatile uint32_t *)(USBCTRL_BASE + 0x024UL))
+#define USBCTRL_ADDR_ENDP10 (*(volatile uint32_t *)(USBCTRL_BASE + 0x028UL))
+#define USBCTRL_ADDR_ENDP11 (*(volatile uint32_t *)(USBCTRL_BASE + 0x02CUL))
+#define USBCTRL_ADDR_ENDP12 (*(volatile uint32_t *)(USBCTRL_BASE + 0x030UL))
+#define USBCTRL_ADDR_ENDP13 (*(volatile uint32_t *)(USBCTRL_BASE + 0x034UL))
+#define USBCTRL_ADDR_ENDP14 (*(volatile uint32_t *)(USBCTRL_BASE + 0x038UL))
+#define USBCTRL_ADDR_ENDP15 (*(volatile uint32_t *)(USBCTRL_BASE + 0x03CUL))
+#define USBCTRL_MAIN_CTRL (*(volatile uint32_t *)(USBCTRL_BASE + 0x040UL))
+#define USBCTRL_SOF_WR (*(volatile uint32_t *)(USBCTRL_BASE + 0x044UL))
+#define USBCTRL_SOF_RD (*(volatile uint32_t *)(USBCTRL_BASE + 0x048UL))
+#define USBCTRL_SIE_CTRL (*(volatile uint32_t *)(USBCTRL_BASE + 0x04CUL))
+#define USBCTRL_SIE_STATUS (*(volatile uint32_t *)(USBCTRL_BASE + 0x050UL))
+#define USBCTRL_INT_EP_CTRL (*(volatile uint32_t *)(USBCTRL_BASE + 0x054UL))
+#define USBCTRL_BUFF_STATUS (*(volatile uint32_t *)(USBCTRL_BASE + 0x058UL))
+#define USBCTRL_BUFF_CPU_SHOULD_HANDLE                                         \
+  (*(volatile uint32_t *)(USBCTRL_BASE + 0x05CUL))
+#define USBCTRL_EP_ABORT (*(volatile uint32_t *)(USBCTRL_BASE + 0x060UL))
+#define USBCTRL_EP_ABORT_DONE (*(volatile uint32_t *)(USBCTRL_BASE + 0x064UL))
+#define USBCTRL_EP_STALL_ARM (*(volatile uint32_t *)(USBCTRL_BASE + 0x068UL))
+#define USBCTRL_NAK_POLL (*(volatile uint32_t *)(USBCTRL_BASE + 0x06CUL))
+#define USBCTRL_EP_STATUS_STALL_NAK                                            \
+  (*(volatile uint32_t *)(USBCTRL_BASE + 0x070UL))
+#define USBCTRL_USB_MUXING (*(volatile uint32_t *)(USBCTRL_BASE + 0x074UL))
+#define USBCTRL_USB_PWR (*(volatile uint32_t *)(USBCTRL_BASE + 0x078UL))
+#define USBCTRL_USBPHY_DIRECT (*(volatile uint32_t *)(USBCTRL_BASE + 0x07CUL))
+#define USBCTRL_USBPHY_DIRECT_OVERRIDE                                         \
+  (*(volatile uint32_t *)(USBCTRL_BASE + 0x080UL))
+#define USBCTRL_USBPHY_TRIM (*(volatile uint32_t *)(USBCTRL_BASE + 0x084UL))
+#define USBCTRL_LINESTATE_TUNING                                               \
+  (*(volatile uint32_t *)(USBCTRL_BASE + 0x088UL))
+#define USBCTRL_INTR (*(volatile uint32_t *)(USBCTRL_BASE + 0x08CUL))
+#define USBCTRL_INTE (*(volatile uint32_t *)(USBCTRL_BASE + 0x090UL))
+#define USBCTRL_INTF (*(volatile uint32_t *)(USBCTRL_BASE + 0x094UL))
+#define USBCTRL_INTS (*(volatile uint32_t *)(USBCTRL_BASE + 0x098UL))
+#define USBCTRL_SOF_TIMESTAMP_RAW                                              \
+  (*(volatile uint32_t *)(USBCTRL_BASE + 0x100UL))
+#define USBCTRL_SOF_TIMESTAMP_LAST                                             \
+  (*(volatile uint32_t *)(USBCTRL_BASE + 0x104UL))
+#define USBCTRL_SM_STATE (*(volatile uint32_t *)(USBCTRL_BASE + 0x108UL))
+#define USBCTRL_EP_TX_ERROR (*(volatile uint32_t *)(USBCTRL_BASE + 0x10CUL))
+#define USBCTRL_EP_RX_ERROR (*(volatile uint32_t *)(USBCTRL_BASE + 0x110UL))
+#define USBCTRL_DEV_SM_WATCHDOG (*(volatile uint32_t *)(USBCTRL_BASE + 0x114UL))
 #define USBCTRL_DPRAM_BASE 0x50100000UL
 #define USBCTRL_REGS_BASE 0x50110000UL
 #define PIO0_BASE 0x50200000UL
