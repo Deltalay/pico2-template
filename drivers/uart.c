@@ -10,7 +10,7 @@ void uart0_init(uint32_t baudrate) {
   while (!(RESETS_RESET_DONE & (1 << 26))) {
   }
   UART0_UARTCR = 0;
-  uint32_t div = 4 * UART_CLCK_SYS / baudrate;
+  uint64_t div = 4 * UART_CLCK_SYS / baudrate;
   uint32_t ibrd = div >> 6;
   uint32_t fbrd = div & 0x3f;
   if (ibrd == 0) {
@@ -39,7 +39,7 @@ void uart1_init(uint32_t baudrate) {
   while (!(RESETS_RESET_DONE & (1 << 27))) {
   }
   UART1_UARTCR = 0;
-  uint32_t div = 4 * UART_CLCK_SYS / baudrate;
+  uint64_t div = 4 * UART_CLCK_SYS / baudrate;
   uint32_t ibrd = div >> 6;
   uint32_t fbrd = div & 0x3f;
   if (ibrd == 0) {

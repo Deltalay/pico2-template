@@ -42,6 +42,11 @@ void init() {
   CLK_SYS_CTRL &= ~(7 << 5);
   CLK_SYS_CTRL |= (0 << 5);
   CLK_SYS_CTRL |= (1 << 0);
+  CLK_PERI_CTRL &= ~(1 << 11);
+  CLK_PERI_CTRL |= (1 << 11);
+  CLK_PERI_CTRL &= ~(7 << 5);
+  CLK_PERI_CTRL |= (0 << 5);
+
   TIMER0_SOURCE = 0;
   TICKS_TIMER0_CTRL &= ~1;
   TICKS_TIMER0_CYCLES = 12;
@@ -71,10 +76,10 @@ void _start(void) {
   pwm_set(25);
   uint8_t percentage = 0;
   int8_t direction = 1;
-
+  uart_set(0);
   while (1) {
     pwm_duty(25, percentage);
-
+    uart0_put(percentage);
     percentage += direction;
 
     if (percentage == 100) {
