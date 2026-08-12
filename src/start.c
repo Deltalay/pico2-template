@@ -10,9 +10,6 @@
  PD2:       2
  */
 void init() {
-  SCB_CPACR |= (0xF << 20); // enable CP10 and CP11
-  __asm volatile("dsb");
-  __asm volatile("isb");
   XOSC_CTRL &= ~(0xFFF << 12);
   XOSC_CTRL |= (0xFAB << 12) | 0xAA0;
 
@@ -54,9 +51,20 @@ void init() {
   while (!(TICKS_TIMER0_CTRL & (1 << 1))) {
   }
 }
-void _start(void) {
-  init();
+void enable_fpu() {
+  SCB_CPACR |= (0xF << 20); // enable CP10 and CP11
+  __asm volatile("dsb");
+  __asm volatile("isb");
+}
+void _start0(void) {
+
+  enable_fpu();
   uart0_init(115200);
+  uart_set(0);
+  while (1) {
+    uart0_puts("HELLO WORLD");
+    delay_s(1);
+  }
   // RESETS_RESET &= ~((1u << 6) | (1U << 9));
   // while ((RESETS_RESET_DONE & ((1u << 6) | (1u << 9))) !=
   //        ((1u << 6) | (1u << 9))) {
@@ -72,14 +80,15 @@ void _start(void) {
   //   delay_s(2);
   //   SIO_GPIO_OUT_XOR = (1 << 25);
   // }
+}
+void _start1(void) {
+  enable_fpu();
   pwm_init();
   pwm_set(25);
   uint8_t percentage = 0;
   int8_t direction = 1;
-  uart_set(0);
   while (1) {
     pwm_duty(25, percentage);
-    uart0_put(percentage);
     percentage += direction;
 
     if (percentage == 100) {

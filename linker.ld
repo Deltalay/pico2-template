@@ -5,7 +5,7 @@ MEMORY
 }
 
 _flash_base = ORIGIN(FLASH);
-_estack = ORIGIN(RAM) + LENGTH(RAM);
+_estack0 = ORIGIN(RAM) + LENGTH(RAM);
 _estack1 = ORIGIN(RAM) + LENGTH(RAM) - 0x1000;
 
 SECTIONS {
