@@ -19,6 +19,6 @@ void delay_us(uint64_t us) {
   }
 }
 
-void delay_ms(uint32_t ms) { delay_us(ms * 1000); }
+void delay_ms(uint32_t ms) { delay_us((uint64_t)ms * 1000ULL); }
 
-void delay_s(uint32_t s) { delay_us(s * 1000000); }
+void delay_s(uint32_t s) { delay_us((uint64_t)s * 1000000ULL); }
