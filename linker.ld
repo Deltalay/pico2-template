@@ -5,51 +5,60 @@ MEMORY
 }
 
 _flash_base = ORIGIN(FLASH);
+
 _estack0 = ORIGIN(RAM) + LENGTH(RAM);
 _estack1 = ORIGIN(RAM) + LENGTH(RAM) - 0x1000;
 
-SECTIONS {
+SECTIONS
+{
+    .init :
+    {
+        . = ALIGN(4);
+        KEEP(*(.init))
+        . = ALIGN(4);
+    } > FLASH
 
-    .init :{
-      . = ALIGN(4);
-      KEEP(*(.init))
-      . = ALIGN(4);
-    } >FLASH
+    .text :
+    {
+        . = ALIGN(4);
 
-    .text :{
-      . = ALIGN(4);
-      KEEP(*(.vectors))
-      *(.text .text*)
-      *(.rodata .rodata*)
-      *(.srodata .srodata*)
-      . = ALIGN(4);
-    } >FLASH
+        KEEP(*(.vectors))
 
-    .sdata :{
-      . = ALIGN(4);
-      _sdata = .;
-    } >RAM
+        *(.text .text*)
+        *(.rodata .rodata*)
+        *(.srodata .srodata*)
 
-    .sidata :{
-      . = ALIGN(4);
-      _sidata = .;
-    } >FLASH
+        . = ALIGN(4);
+    } > FLASH
 
-    .data :{
-      . = ALIGN(4);
-      *(.data .data.*)
-      *(.sdata .sdata.*)
-      . = ALIGN(4);
-      _edata = .;
-    } >RAM AT>FLASH
+    .data :
+    {
+        . = ALIGN(4);
 
-    .bss :{
-      . = ALIGN(4);
-      _sbss = .;
-      *(.sbss*)
-      *(.bss*)
-      . = ALIGN(4);
-      _ebss = .;
-    } >RAM
+        _sdata = .;
 
+        *(.data .data.*)
+        *(.sdata .sdata.*)
+
+        . = ALIGN(4);
+
+        _edata = .;
+    } > RAM AT > FLASH
+
+    _sidata = LOADADDR(.data);
+
+    .bss :
+    {
+        . = ALIGN(4);
+
+        _sbss = .;
+
+        *(.sbss .sbss.*)
+        *(.bss .bss.*)
+        *(COMMON)
+
+        . = ALIGN(4);
+
+        _ebss = .;
+    } > RAM
 }

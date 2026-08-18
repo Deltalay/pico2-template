@@ -1,6 +1,6 @@
 .section .init, "a"
-.align 4
-.word _estack
+.p2align 2
+.word _estack0
 .word Reset_Handler
 
 .word 0xffffded3

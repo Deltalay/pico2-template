@@ -1,32 +1,63 @@
 cmake_minimum_required(VERSION 3.15)
-set(CMAKE_SYSTEM_NAME Generic)
-set(CMAKE_SYSTEM_PROCESSOR arm)
-set(CMAKE_C_COMPILER arm-none-eabi-gcc)
-set(CMAKE_ASM_COMPILER arm-none-eabi-gcc)
-set(CMAKE_OBJCOPY arm-none-eabi-objcopy)
-set(CMAKE_SIZE arm-none-eabi-size)
+set(ARCH "ARM" CACHE STRING "Switch between ARM and RISC-V")
+set_property(CACHE ARCH PROPERTY STRINGS ARM RISCV)
+if(ARCH STREQUAL "ARM")
+    message(STATUS "Building for ARM")
+    set(CMAKE_SYSTEM_NAME Generic)
+    set(CMAKE_SYSTEM_PROCESSOR arm)
+    set(CMAKE_C_COMPILER arm-none-eabi-gcc)
+    set(CMAKE_ASM_COMPILER arm-none-eabi-gcc)
+    set(CMAKE_OBJCOPY arm-none-eabi-objcopy)
+    set(CMAKE_SIZE arm-none-eabi-size)
+    set(SOURCE
+        src/start.c
+        drivers/timer.c
+        drivers/gpio.c
+        drivers/usb.c
+        drivers/uart.c
+        drivers/pwm.c
+        arch/arm/vector_table.S
+        arch/arm/startup.S
+    )
+    set(ARCH_FLAGS
+        -mcpu=cortex-m33
+        -mthumb
+        -ffreestanding
+    )
+elseif(ARCH STREQUAL "RISCV")
+    message(STATUS "Building for RISC-V")
+    set(CMAKE_SYSTEM_NAME Generic)
+    set(CMAKE_SYSTEM_PROCESSOR riscv)
+    set(CMAKE_C_COMPILER riscv-none-elf-gcc)
+    set(CMAKE_ASM_COMPILER riscv-none-elf-gcc)
+    set(CMAKE_OBJCOPY riscv-none-elf-objcopy)
+    set(CMAKE_SIZE riscv-none-elf-size)
+    set(SOURCE
+        src/start.c
+        drivers/timer.c
+        drivers/gpio.c
+        drivers/usb.c
+        drivers/uart.c
+        drivers/pwm.c
+        arch/riscv/trap.S
+        arch/riscv/startup.S
+    )
+    set(ARCH_FLAGS
+        -march=rv32imac_zicsr_zifencei_zba_zbb_zbc_zbs_zbkb
+        -mabi=ilp32
+        -ffreestanding
+    )
+else()
+    message(FATAL_ERROR "Unknown ARCH: ${ARCH}")
+endif()
+
 set(CMAKE_TRY_COMPILE_TARGET_TYPE STATIC_LIBRARY)
 project(RP2350_BareMetal C ASM)
 set(CMAKE_EXECUTABLE_SUFFIX ".elf")
 set(TARGET_NAME template)
-
-set(SOURCE
-    src/start.c
-    drivers/timer.c
-    drivers/gpio.c
-    drivers/usb.c
-    drivers/uart.c
-    drivers/pwm.c
-    arch/arm/vector_table.S
-    arch/arm/startup.S
-)
-
-set(COMMON_FLAGS "-mcpu=cortex-m33 -mthumb -ffreestanding")
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${COMMON_FLAGS}")
-set(CMAKE_ASM_FLAGS "${CMAKE_ASM_FLAGS} ${COMMON_FLAGS}")
-
 add_executable(${TARGET_NAME} ${SOURCE})
 target_compile_options(${TARGET_NAME} PRIVATE
+    ${ARCH_FLAGS}
     -Os
     -ffunction-sections
     -fdata-sections
@@ -35,6 +66,13 @@ target_compile_options(${TARGET_NAME} PRIVATE
     -Wshadow
     -Wundef
 )
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+if(ARCH STREQUAL "ARM")
+    target_compile_definitions(${TARGET_NAME} PRIVATE ARCH_ARM)
+
+elseif(ARCH STREQUAL "RISCV")
+    target_compile_definitions(${TARGET_NAME} PRIVATE ARCH_RISCV)
+endif()
 target_link_options(${TARGET_NAME} PRIVATE
     -nostdlib
     -nostartfiles
