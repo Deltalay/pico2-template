@@ -1,3 +1,10 @@
+#define ARCH_ARM 0
+#define ARCH_RISCV 1
+#ifndef ARCH
+#define ARCH ARCH_ARM
+#endif
+// ARCH 0 = ARM
+// ARCH 1 = RISCV
 #include "../header/pwm.h"
 #include "../header/reg.h"
 #include "../header/timer.h"
@@ -52,9 +59,12 @@ void init() {
   }
 }
 void enable_fpu() {
+#if ARCH == ARCH_ARM
   SCB_CPACR |= (0xF << 20); // enable CP10 and CP11
   __asm volatile("dsb");
   __asm volatile("isb");
+#else
+#endif
 }
 void _start0(void) {
 
