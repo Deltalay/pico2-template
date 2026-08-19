@@ -10,10 +10,11 @@
 .extern init
 .extern _start1
 .p2align 2
-.equ SIO_BASE,       0xD0000000
-.equ FIFO_ST_OFFSET, 0x050
-.equ FIFO_WR_OFFSET, 0x054
-.equ FIFO_RD_OFFSET, 0x058
+.equ sio_base, 0xd0000000
+.equ cpu_id_offset, 0x00
+.equ fifo_st_offset, 0x050
+.equ fifo_wr_offset, 0x054
+.equ fifo_rd_offset, 0x058
 .macro VEC name:req
 .p2align 2
 j \name
@@ -65,13 +66,13 @@ Reset_Handler:
     j 3b
 4:
     call init
-    # la a0, vector_table
-    # la a1, _estack1
-    # la a2, _start1
-    # call Launch_Core1
+    la a0, vector_table
+    la a1, _estack1
+    la a2, _start1
+    call Launch_Core1
 
 5:
-    call _start1
+    call _start0
     j Default_Handler
 
 .section .text
@@ -81,4 +82,46 @@ Default_Handler:
     j 1b
 .type Launch_Core1, @function
 Launch_Core1:
-    call Default_Handler
+    addi sp, sp, -24
+    sw a0, 12(sp)
+    sw a1, 16(sp)
+    sw a2, 20(sp)
+    li t0, 1
+    sw t0, 8(sp)
+    sw zero, 4(sp)
+    sw zero, 0(sp)
+    li t4, sio_base
+0:
+    li t5, 0
+1:
+    slli t6, t5, 2
+    add t6, sp, t6
+    lw t6, 0(t6)
+    bnez t6, 3f
+2:
+    lw t0, fifo_st_offset(t4)
+    andi t0, t0, 1
+    beqz t0, 3f
+    lw t0, fifo_rd_offset(t4)
+    slt x0, x0, x1
+    j 2b
+3:
+    lw t0, fifo_st_offset(t4)
+    srli t0, t0, 1
+    andi t0, t0, 1
+    beqz t0, 3b
+    sw   t6, fifo_wr_offset(t4)
+    slt x0, x0, x1
+4:
+    lw t0, fifo_st_offset(t4)
+    andi t0, t0, 1
+    beqz t0, 4b
+    lw t0, fifo_rd_offset(t4)
+    bne t0, t6, 0b
+5:
+    addi t5, t5, 1
+    li   t0, 6
+    blt  t5, t0, 1b
+6:
+    addi sp, sp, 24         # Clean up stack frame
+    ret
