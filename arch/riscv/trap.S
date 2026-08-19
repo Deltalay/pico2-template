@@ -10,10 +10,11 @@
 .extern init
 .extern _start1
 .p2align 2
-.equ SIO_BASE,       0xD0000000
-.equ FIFO_ST_OFFSET, 0x050
-.equ FIFO_WR_OFFSET, 0x054
-.equ FIFO_RD_OFFSET, 0x058
+.equ sio_base, 0xd0000000
+.equ cpu_id_offset, 0x00
+.equ fifo_st_offset, 0x050
+.equ fifo_wr_offset, 0x054
+.equ fifo_rd_offset, 0x058
 .macro VEC name:req
 .p2align 2
 j \name
@@ -81,4 +82,45 @@ Default_Handler:
     j 1b
 .type Launch_Core1, @function
 Launch_Core1:
-    call Default_Handler
+    addi sp, sp, -24
+    ori  a2, a2, 1
+    sw a0, 20(sp)
+    sw a1, 16(sp)
+    sw a2, 12(sp)
+    li t0, 1
+    sw t0, 8(sp)
+    sw zero, 4(sp)
+    sw zero, 0(sp)
+    la t4, sio_base
+0:
+    li t5, 0
+1:
+    slli t6, t5, 2
+    add t6, sp, t6
+    lw t6, 0(t6)
+    bnez 3f
+2:
+    lw t0, fifo_st_offset(t4)
+    andi t0, t0, 1
+    beqz 3f
+    lw t0, fifo_rd_offset(t4)
+    j 2b
+3:
+    lw t0, fifo_st_offset(t4)
+    srli t0, t0, 1
+    andi t0, t0, 1
+    beqz t0, 3b
+    sw   t6, fifo_wr_offset(t4)
+4:
+    lw t0, fifo_st_offset(t4)
+    andi t0, t0, 1
+    beqz 4b
+    lw t0, fifo_rd_offset(t4)
+    bne t0, t6, 0b
+5:
+    addi t5, t5, 1
+    li   t0, 6
+    blt  t5, t0, 1b
+6:
+    addi sp, sp, 24         # Clean up stack frame
+    ret
