@@ -1,7 +1,7 @@
 #ifndef I2C_H
 #define I2C_H
 #include <stdint.h>
-#define CLK_SYS_SPEED 150000000
+#define IC_CLK 150000000
 enum i2c_speed {
   I2C_SPEED_STANDARD = 100000,
   I2C_SPEED_FAST = 400000,
