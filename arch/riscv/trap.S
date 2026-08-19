@@ -66,13 +66,13 @@ Reset_Handler:
     j 3b
 4:
     call init
-    # la a0, vector_table
-    # la a1, _estack1
-    # la a2, _start1
-    # call Launch_Core1
+    la a0, vector_table
+    la a1, _estack1
+    la a2, _start1
+    call Launch_Core1
 
 5:
-    call _start1
+    call _start0
     j Default_Handler
 
 .section .text
@@ -83,27 +83,27 @@ Default_Handler:
 .type Launch_Core1, @function
 Launch_Core1:
     addi sp, sp, -24
-    ori  a2, a2, 1
-    sw a0, 20(sp)
+    sw a0, 12(sp)
     sw a1, 16(sp)
-    sw a2, 12(sp)
+    sw a2, 20(sp)
     li t0, 1
     sw t0, 8(sp)
     sw zero, 4(sp)
     sw zero, 0(sp)
-    la t4, sio_base
+    li t4, sio_base
 0:
     li t5, 0
 1:
     slli t6, t5, 2
     add t6, sp, t6
     lw t6, 0(t6)
-    bnez 3f
+    bnez t6, 3f
 2:
     lw t0, fifo_st_offset(t4)
     andi t0, t0, 1
-    beqz 3f
+    beqz t0, 3f
     lw t0, fifo_rd_offset(t4)
+    slt x0, x0, x1
     j 2b
 3:
     lw t0, fifo_st_offset(t4)
@@ -111,10 +111,11 @@ Launch_Core1:
     andi t0, t0, 1
     beqz t0, 3b
     sw   t6, fifo_wr_offset(t4)
+    slt x0, x0, x1
 4:
     lw t0, fifo_st_offset(t4)
     andi t0, t0, 1
-    beqz 4b
+    beqz t0, 4b
     lw t0, fifo_rd_offset(t4)
     bne t0, t6, 0b
 5:
