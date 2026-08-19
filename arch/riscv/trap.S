@@ -66,10 +66,10 @@ Reset_Handler:
     j 3b
 4:
     call init
-    # la a0, vector_table
-    # la a1, _estack1
-    # la a2, _start1
-    # call Launch_Core1
+    la a0, vector_table
+    la a1, _estack1
+    la a2, _start1
+    call Launch_Core1
 
 5:
     call _start1
