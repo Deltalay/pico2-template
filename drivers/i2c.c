@@ -8,17 +8,20 @@ void i2c_init(uint8_t sda_pin, uint8_t scl_pin, enum i2c_speed speed) {
   if (sda_pin <= 20 && sda_pin % 4 == 0) {
     // For SCL normally in block 0, it is SDA + 1, thus to check
     // if it on the same block, we just - 1 from it.
-    assert((scl_pin - 1) % 4);
+    i2c_block = 0;
+    assert((scl_pin - 1) % 4 == 0);
     RESETS_RESET |= (1 << 4);
     RESETS_RESET &= ~(1 << 4);
     while (!(RESETS_RESET_DONE & (1 << 4))) {
     }
+    I2C0_IC_ENABLE &= ~(1 << 0);
   } else {
     i2c_block = 1;
     RESETS_RESET |= (1 << 5);
     RESETS_RESET &= ~(1 << 5);
     while (!(RESETS_RESET_DONE & (1 << 5))) {
     }
+    I2C1_IC_ENABLE &= ~(1 << 0);
   }
   uint8_t pad0_reset_val = (RESETS_RESET >> 9) & 1;
   uint8_t io_bank0_reset_val = (RESETS_RESET >> 6) & 1;
@@ -55,37 +58,66 @@ void i2c_init(uint8_t sda_pin, uint8_t scl_pin, enum i2c_speed speed) {
   *pad_scl |= (1 << 3);
   *pad_scl &= ~(1 << 2);
   *pad_scl &= ~(1 << 8);
+
   switch (speed) {
   case I2C_SPEED_STANDARD: {
     if (i2c_block == 0) {
-      I2C0_IC_CON &= (0b11 << 1);
+      I2C0_IC_CON &= ~(0b11 << 1);
       I2C0_IC_CON |= (0b1 << 1);
+      I2C0_IC_SS_SCL_HCNT = 572;
+      I2C0_IC_SS_SCL_LCNT = 899;
+
       break;
     }
-    I2C1_IC_CON &= (0b11 << 1);
+    I2C1_IC_CON &= ~(0b11 << 1);
     I2C1_IC_CON |= (0b1 << 1);
+    I2C1_IC_SS_SCL_HCNT = 572;
+    I2C1_IC_SS_SCL_LCNT = 899;
+
     break;
   }
   // According to reference manual, both Fast and Fast plus is 0x2
   case I2C_SPEED_FAST:
-  case I2C_SPEED_FAST_PLUS:
     if (i2c_block == 0) {
-      I2C0_IC_CON &= (0b11 << 1);
+      I2C0_IC_CON &= ~(0b11 << 1);
       I2C0_IC_CON |= (0b10 << 1);
+      I2C0_IC_FS_SCL_HCNT = 62;
+      I2C0_IC_FS_SCL_LCNT = 284;
+
       break;
     }
-    I2C1_IC_CON &= (0b11 << 1);
+    I2C1_IC_CON &= ~(0b11 << 1);
     I2C1_IC_CON |= (0b10 << 1);
+    I2C1_IC_FS_SCL_HCNT = 62;
+    I2C1_IC_FS_SCL_LCNT = 284;
+    break;
+  case I2C_SPEED_FAST_PLUS:
+    if (i2c_block == 0) {
+      I2C0_IC_CON &= ~(0b11 << 1);
+      I2C0_IC_CON |= (0b10 << 1);
+      I2C0_IC_FS_SCL_HCNT = 10;
+      I2C0_IC_FS_SCL_LCNT = 110;
+      break;
+    }
+    I2C1_IC_CON &= ~(0b11 << 1);
+    I2C1_IC_CON |= (0b10 << 1);
+    I2C1_IC_FS_SCL_HCNT = 10;
+    I2C1_IC_FS_SCL_LCNT = 110;
     break;
   // Default to standard speed, since it is upward compatible.
   default:
     if (i2c_block == 0) {
-      I2C0_IC_CON &= (0b11 << 1);
-      I2C0_IC_CON |= (0b1 << 1);
+      I2C0_IC_CON &= ~(0b11 << 1);
+      I2C0_IC_CON |= (0b10 << 1);
+      I2C0_IC_FS_SCL_HCNT = 62;
+      I2C0_IC_FS_SCL_LCNT = 284;
+
       break;
     }
-    I2C1_IC_CON &= (0b11 << 1);
-    I2C1_IC_CON |= (0b1 << 1);
+    I2C1_IC_CON &= ~(0b11 << 1);
+    I2C1_IC_CON |= (0b10 << 1);
+    I2C1_IC_FS_SCL_HCNT = 62;
+    I2C1_IC_FS_SCL_LCNT = 284;
     break;
   }
 }
