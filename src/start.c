@@ -1,5 +1,3 @@
-// ARCH 0 = ARM
-// ARCH 1 = RISCV
 #include "../header/pwm.h"
 #include "../header/reg.h"
 #include "../header/timer.h"
@@ -25,18 +23,18 @@ void init() {
   while (!(RESETS_RESET_DONE & (1 << 14))) {
   }
   // PLL_SYS
-  PLL_SYS_PWR &= ~(1 << 0);
-  PLL_SYS_PWR &= ~(1 << 3);
-  PLL_SYS_PWR &= ~(1 << 5);
   PLL_SYS_CS &= ~(0x3F << 0);
   PLL_SYS_CS |= 1; // REFDIV = 1
 
   PLL_SYS_FBDIV_INT = 125; // FBDIV
+  PLL_SYS_PWR &= ~(1 << 0);
+  PLL_SYS_PWR &= ~(1 << 5);
 
-  PLL_SYS_PRIM &= ~((7 << 16) | (7 << 12));
-  PLL_SYS_PRIM |= (5 << 16) | (2 << 12);
   while (!(PLL_SYS_CS & (1 << 31))) {
   }
+  PLL_SYS_PRIM &= ~((7 << 16) | (7 << 12));
+  PLL_SYS_PRIM |= (5 << 16) | (2 << 12);
+  PLL_SYS_PWR &= ~(1 << 3);
 
   CLK_SYS_CTRL &= ~(7 << 5);
   CLK_SYS_CTRL |= (0 << 5);
