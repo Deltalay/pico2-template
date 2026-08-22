@@ -16,7 +16,6 @@ if(ARCH STREQUAL "ARM")
         drivers/usb.c
         drivers/uart.c
         drivers/pwm.c
-        arch/arm/vector_table.S
         arch/arm/startup.S
     )
     set(ARCH_FLAGS
@@ -39,7 +38,6 @@ elseif(ARCH STREQUAL "RISCV")
         drivers/usb.c
         drivers/uart.c
         drivers/pwm.c
-        arch/riscv/trap.S
         arch/riscv/startup.S
     )
     set(ARCH_FLAGS

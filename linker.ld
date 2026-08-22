@@ -23,7 +23,7 @@ SECTIONS
         . = ALIGN(4);
 
         KEEP(*(.vectors))
-
+        KEEP(*(.pico_image_def))
         *(.text .text*)
         *(.rodata .rodata*)
         *(.srodata .srodata*)
