@@ -32,8 +32,7 @@ void init() {
 
   while (!(PLL_SYS_CS & (1 << 31))) {
   }
-  PLL_SYS_PRIM &= ~((7 << 16) | (7 << 12));
-  PLL_SYS_PRIM |= (5 << 16) | (2 << 12);
+  PLL_SYS_PRIM = (5 << 16) | (2 << 12);
   PLL_SYS_PWR &= ~(1 << 3);
 
   CLK_SYS_CTRL &= ~(7 << 5);
