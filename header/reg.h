@@ -1,8 +1,21 @@
 #ifndef REG_H
 #define REG_H
 #include <stdint.h>
-// ARM
+#if defined(ARCH_ARM)
 #define SCB_CPACR (*(volatile uint32_t *)0xE000ED88)
+#define NVIC_ISER0 (*(volatile uint32_t *)0xE000E100)
+#define NVIC_ICER0 (*(volatile uint32_t *)0xE000E180)
+#define NVIC_ISPR0 (*(volatile uint32_t *)0xE000E200)
+#define NVIC_ICPR0 (*(volatile uint32_t *)0xE000E280)
+#define NVIC_ISER1 (*(volatile uint32_t *)0xE000E104)
+#define NVIC_ICER1 (*(volatile uint32_t *)0xE000E184)
+#define NVIC_ISPR1 (*(volatile uint32_t *)0xE000E204)
+#define NVIC_ICPR1 (*(volatile uint32_t *)0xE000E284)
+#elif defined(ARCH_RISCV)
+
+#else
+#error "UNKNOWN ARCH"
+#endif
 
 // PI
 #define XIP_BASE 0x10000000UL
@@ -677,7 +690,8 @@
 #define USBCTRL_EP_RX_ERROR                                                    \
   (*(volatile uint32_t *)(USBCTRL_REGS_BASE + 0x110UL))
 #define USBCTRL_DEV_SM_WATCHDOG                                                \
-  (*(volatile uint32_t *)(USBCTRL_REGS_BASE + 0x114UL))#define PIO0_BASE 0x50200000UL
+  (*(volatile uint32_t *)(USBCTRL_REGS_BASE +                                  \
+                          0x114UL)) #define PIO0_BASE 0x50200000UL
 #define PIO1_BASE 0x50300000UL
 #define PIO2_BASE 0x50400000UL
 #define XIP_AUX_BASE 0x50500000UL

@@ -1,7 +1,9 @@
+#include "../header/irq.h"
 #include "../header/pwm.h"
 #include "../header/reg.h"
 #include "../header/timer.h"
 #include "../header/uart.h"
+
 /*
  REFDIV:    1
  FBDIV:     125
@@ -64,6 +66,9 @@ void enable_fpu() {
 void _start0(void) {
 
   enable_fpu();
+  irq_enable(USBCTRL_IRQ);
+  irq_global_enable();
+
   uart0_init(115200);
   uart_set(0);
   while (1) {
