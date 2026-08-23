@@ -623,7 +623,31 @@
 #define TBMAN_BASE 0x40160000UL
 #define DMA_BASE 0x50000000UL
 #define USBCTRL_BASE 0x50100000UL
-#define USBCTRL_DPRAM_BASE (USBCTRL_BASE + 0x0000UL)
+// Please read for Page: 1148 in PDF, 1147 in book, for more offset in DPRAM
+// My suggestion is to build struct that define the structure.
+// for example this is the struct for device mode. 
+// typedef struct {
+//   volatile uint32_t in;
+//   volatile uint32_t out;
+// } usb_ep_control_pair_t;
+// typedef struct {
+//   volatile uint32_t in;
+//   volatile uint32_t out;
+// } usb_ep_buffer_control_pair_t;
+// typedef struct {
+//   uint8_t setup_packet[8];
+//   // 0x008
+//   usb_ep_control_pair_t ep_control[15];
+//   // 0x080
+//   usb_ep_buffer_control_pair_t ep_buffer_control[16];
+//   // 0x100
+//   uint8_t ep0_buffer[64];
+//   // 0x140
+//   uint8_t ep0_buffer_1[64];
+//   // 0x180
+//   uint8_t data[0xe80];
+// } usb_dpram_t;
+#define USBCTRL_DPRAM ((volatile uint32_t *)(USBCTRL_BASE + 0x0000UL))
 #define USBCTRL_REGS_BASE (USBCTRL_BASE + 0x10000UL)
 #define USBCTRL_ADDR_ENDP (*(volatile uint32_t *)(USBCTRL_REGS_BASE + 0x000UL))
 #define USBCTRL_ADDR_ENDP1 (*(volatile uint32_t *)(USBCTRL_REGS_BASE + 0x004UL))
@@ -690,8 +714,8 @@
 #define USBCTRL_EP_RX_ERROR                                                    \
   (*(volatile uint32_t *)(USBCTRL_REGS_BASE + 0x110UL))
 #define USBCTRL_DEV_SM_WATCHDOG                                                \
-  (*(volatile uint32_t *)(USBCTRL_REGS_BASE +                                  \
-                          0x114UL)) #define PIO0_BASE 0x50200000UL
+  (*(volatile uint32_t *)(USBCTRL_REGS_BASE + 0x114UL))
+#define PIO0_BASE 0x50200000UL
 #define PIO1_BASE 0x50300000UL
 #define PIO2_BASE 0x50400000UL
 #define XIP_AUX_BASE 0x50500000UL
