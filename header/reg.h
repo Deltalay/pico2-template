@@ -365,6 +365,19 @@
 #define PADS_BANK0_SWCLK (*(volatile uint32_t *)(PADS_BANK0_BASE + 0xC4UL))
 #define PADS_BANK0_SWD (*(volatile uint32_t *)(PADS_BANK0_BASE + 0xC8UL))
 #define PADS_QSPI_BASE 0x40040000UL
+#define PADS_QSPI_VOLTAGE_SELECT                                               \
+  (*(volatile uint32_t *)(PADS_QSPI_BASE + 0x00UL))
+#define PADS_QSPI_GPIO_QSPI_SCLK                                               \
+  (*(volatile uint32_t *)(PADS_QSPI_BASE + 0x04UL))
+#define PADS_QSPI_GPIO_QSPI_SD0                                                \
+  (*(volatile uint32_t *)(PADS_QSPI_BASE + 0x08UL))
+#define PADS_QSPI_GPIO_QSPI_SD1                                                \
+  (*(volatile uint32_t *)(PADS_QSPI_BASE + 0x0CUL))
+#define PADS_QSPI_GPIO_QSPI_SD2                                                \
+  (*(volatile uint32_t *)(PADS_QSPI_BASE + 0x10UL))
+#define PADS_QSPI_GPIO_QSPI_SD3                                                \
+  (*(volatile uint32_t *)(PADS_QSPI_BASE + 0x14UL))
+#define PADS_QSPI_GPIO_QSPI_SS (*(volatile uint32_t *)(PADS_QSPI_BASE + 0x18UL))
 #define XOSC_BASE 0x40048000UL
 #define XOSC_CTRL (*(volatile uint32_t *)(XOSC_BASE + 0x00UL))
 #define XOSC_STATUS (*(volatile uint32_t *)(XOSC_BASE + 0x04UL))
