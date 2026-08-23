@@ -69,28 +69,28 @@ Extract the fractional part:
 
 ```text
 FBRD = 5208 & 0x3F
-     = 8
+     = 24
 ```
 
 Therefore:
 
 ```text
 IBRD = 81
-FBRD = 8
+FBRD = 24
 ```
 
 The actual divisor represented by these values is:
 
 ```text
-81 + 8/64
-= 81.125
+81 + 24/64
+= 81.375
 ```
 
 The resulting baud rate is approximately:
 
 ```text
-150,000,000 / (16 × 81.125)
-≈ 115207 baud
+150,000,000 / (16 × 81.375)
+= 115207.37 baud ≈  115207 baud
 ```
 
 which is extremely close to the requested `115200 baud`.
