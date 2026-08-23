@@ -256,6 +256,61 @@
 #define DORMANT_WAKE_INTS4 (*(volatile uint32_t *)(IO_BANK0_BASE + 0x318UL))
 #define DORMANT_WAKE_INTS5 (*(volatile uint32_t *)(IO_BANK0_BASE + 0x31CUL))
 #define IO_QSPI_BASE 0x40030000UL
+#define IO_QSPI_USBPHY_DP_STATUS                                               \
+  (*(volatile uint32_t *)(IO_QSPI_BASE + 0x000UL))
+#define IO_QSPI_USBPHY_DP_CTRL (*(volatile uint32_t *)(IO_QSPI_BASE + 0x004UL))
+#define IO_QSPI_USBPHY_DM_STATUS                                               \
+  (*(volatile uint32_t *)(IO_QSPI_BASE + 0x008UL))
+#define IO_QSPI_USBPHY_DM_CTRL (*(volatile uint32_t *)(IO_QSPI_BASE + 0x00CUL))
+#define IO_QSPI_GPIO_QSPI_SCLK_STATUS                                          \
+  (*(volatile uint32_t *)(IO_QSPI_BASE + 0x010UL))
+#define IO_QSPI_GPIO_QSPI_SCLK_CTRL                                            \
+  (*(volatile uint32_t *)(IO_QSPI_BASE + 0x014UL))
+#define IO_QSPI_GPIO_QSPI_SS_STATUS                                            \
+  (*(volatile uint32_t *)(IO_QSPI_BASE + 0x018UL))
+#define IO_QSPI_GPIO_QSPI_SS_CTRL                                              \
+  (*(volatile uint32_t *)(IO_QSPI_BASE + 0x01CUL))
+#define IO_QSPI_GPIO_QSPI_SD0_STATUS                                           \
+  (*(volatile uint32_t *)(IO_QSPI_BASE + 0x020UL))
+#define IO_QSPI_GPIO_QSPI_SD0_CTRL                                             \
+  (*(volatile uint32_t *)(IO_QSPI_BASE + 0x024UL))
+#define IO_QSPI_GPIO_QSPI_SD1_STATUS                                           \
+  (*(volatile uint32_t *)(IO_QSPI_BASE + 0x028UL))
+#define IO_QSPI_GPIO_QSPI_SD1_CTRL                                             \
+  (*(volatile uint32_t *)(IO_QSPI_BASE + 0x02CUL))
+#define IO_QSPI_GPIO_QSPI_SD2_STATUS                                           \
+  (*(volatile uint32_t *)(IO_QSPI_BASE + 0x030UL))
+#define IO_QSPI_GPIO_QSPI_SD2_CTRL                                             \
+  (*(volatile uint32_t *)(IO_QSPI_BASE + 0x034UL))
+#define IO_QSPI_GPIO_QSPI_SD3_STATUS                                           \
+  (*(volatile uint32_t *)(IO_QSPI_BASE + 0x038UL))
+#define IO_QSPI_GPIO_QSPI_SD3_CTRL                                             \
+  (*(volatile uint32_t *)(IO_QSPI_BASE + 0x03CUL))
+#define IO_QSPI_IRQSUMMARY_PROC0_SECURE                                        \
+  (*(volatile uint32_t *)(IO_QSPI_BASE + 0x200UL))
+#define IO_QSPI_IRQSUMMARY_PROC0_NONSECURE                                     \
+  (*(volatile uint32_t *)(IO_QSPI_BASE + 0x204UL))
+#define IO_QSPI_IRQSUMMARY_PROC1_SECURE                                        \
+  (*(volatile uint32_t *)(IO_QSPI_BASE + 0x208UL))
+#define IO_QSPI_IRQSUMMARY_PROC1_NONSECURE                                     \
+  (*(volatile uint32_t *)(IO_QSPI_BASE + 0x20CUL))
+#define IO_QSPI_IRQSUMMARY_COMA_WAKE_SECURE                                    \
+  (*(volatile uint32_t *)(IO_QSPI_BASE + 0x210UL))
+#define IO_QSPI_IRQSUMMARY_COMA_WAKE_NONSECURE                                 \
+  (*(volatile uint32_t *)(IO_QSPI_BASE + 0x214UL))
+#define IO_QSPI_INTR (*(volatile uint32_t *)(IO_QSPI_BASE + 0x218UL))
+#define IO_QSPI_PROC0_INTE (*(volatile uint32_t *)(IO_QSPI_BASE + 0x21CUL))
+#define IO_QSPI_PROC0_INTF (*(volatile uint32_t *)(IO_QSPI_BASE + 0x220UL))
+#define IO_QSPI_PROC0_INTS (*(volatile uint32_t *)(IO_QSPI_BASE + 0x224UL))
+#define IO_QSPI_PROC1_INTE (*(volatile uint32_t *)(IO_QSPI_BASE + 0x228UL))
+#define IO_QSPI_PROC1_INTF (*(volatile uint32_t *)(IO_QSPI_BASE + 0x22CUL))
+#define IO_QSPI_PROC1_INTS (*(volatile uint32_t *)(IO_QSPI_BASE + 0x230UL))
+#define IO_QSPI_DORMANT_WAKE_INTE                                              \
+  (*(volatile uint32_t *)(IO_QSPI_BASE + 0x234UL))
+#define IO_QSPI_DORMANT_WAKE_INTF                                              \
+  (*(volatile uint32_t *)(IO_QSPI_BASE + 0x238UL))
+#define IO_QSPI_DORMANT_WAKE_INTS                                              \
+  (*(volatile uint32_t *)(IO_QSPI_BASE + 0x23CUL))
 #define PADS_BANK0_BASE 0x40038000UL
 #define PADS_BANK0_VOLTAGE_SELECT                                              \
   (*(volatile uint32_t *)(PADS_BANK0_BASE + 0x00UL))
