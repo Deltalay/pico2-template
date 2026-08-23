@@ -27,6 +27,7 @@
 .word 0xab123579
 .section .vectors, "a", %progbits
 .type vector_table, %object
+.align 9
 vector_table:
     .word _estack0
     .word Reset_Handler
