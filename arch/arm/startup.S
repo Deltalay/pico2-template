@@ -15,6 +15,7 @@
 .extern _start1
 .extern usbctrl_irq
 .equ sio_base, 0xd0000000
+.equ vtor, 0xE000ED08
 .equ cpu_id_offset, 0x00
 .equ fifo_st_offset, 0x050
 .equ fifo_wr_offset, 0x054
@@ -312,15 +313,24 @@ Reset_Handler:
 
 4:
     ldr r0, =vector_table
-    ldr r1, =0xE000ED08
+    ldr r1, =vtor
     str r0, [r1]
     bl init
     ldr r0, =vector_table
     ldr r1, =_estack1
-    ldr r2, =_start1
+    ldr r2, =Reset_Handler1
     bl Launch_Core1
 5:
     bl _start0
+    b Default_Handler
+
+.type Reset_Handler1, %function
+.thumb_func
+Reset_Handler1:
+    ldr r0, =vector_table
+    ldr r1, =vtor
+    str r0, [r1]
+    bl _start1
     b Default_Handler
 .type Default_Handler, %function
 Default_Handler:
