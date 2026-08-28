@@ -15,7 +15,7 @@ void gpio_init(uint8_t pin_number, rp2350_gpio_func_t function)
     if (RESETS_RESET & (1 << 9))
     {
         RESETS_RESET &= ~(1 << 9);
-        while (!(RESETS_RESET_DONE & (1 << 6)))
+        while (!(RESETS_RESET_DONE & (1 << 9)))
         {}
     }
 
@@ -46,10 +46,10 @@ void gpio_out(uint8_t pin_number, rp2350_pin_state_t state)
     // For clr, and set it is WO.
     if (state == LOW)
     {
-        SIO_GPIO_OE_CLR = 1 << pin_number;
+        SIO_GPIO_OUT_CLR = 1 << pin_number;
         return;
     }
-    SIO_GPIO_OE_SET = 1 << pin_number;
+    SIO_GPIO_OUT_SET = 1 << pin_number;
 }
 rp2350_pin_state_t gpio_read(uint8_t pin_number)
 {
