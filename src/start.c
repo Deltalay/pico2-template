@@ -67,8 +67,6 @@ void enable_fpu() {
 void _start0(void) {
 
   enable_fpu();
-  irq_enable(IRQ_USBCTRL);
-  irq_global_enable();
 
   uart0_init(115200);
   uart_set(0);

@@ -68,7 +68,7 @@ Reset_Handler:
     call init
     la a0, vector_table
     la a1, _estack1
-    la a2, _start1
+    la a2, Reset_Handler1
     call Launch_Core1
 
 5:
@@ -83,7 +83,13 @@ Reset_Handler:
     .word 0x00000000
     .word 0xab123579
 .section .text
-
+.type Reset_Handler1, @function
+Reset_Handler1:
+    la t0, vector_table
+    ori t0, t0, 1
+    csrw mtvec, t0
+    call _start1
+    j Default_Handler
 .type Default_Handler, @function
 Default_Handler:
 1:
