@@ -1,3 +1,4 @@
+#include "../header/gpio.h"
 #include "../header/irq.h"
 #include "../header/pwm.h"
 #include "../header/reg.h"
@@ -66,7 +67,7 @@ void enable_fpu() {
 void _start0(void) {
 
   enable_fpu();
-  irq_enable(USBCTRL_IRQ);
+  irq_enable(IRQ_USBCTRL);
   irq_global_enable();
 
   uart0_init(115200);
@@ -93,20 +94,25 @@ void _start0(void) {
 }
 void _start1(void) {
   enable_fpu();
-  pwm_init();
-  pwm_set(25);
-  uint8_t percentage = 0;
-  int8_t direction = 1;
+  // pwm_init();
+  // pwm_set(25);
+  // uint8_t percentage = 0;
+  // int8_t direction = 1;
+  gpio_init(25, SIO);
+  gpio_set(25, OUTPUT);
   while (1) {
-    pwm_duty(25, percentage);
-    percentage += direction;
+    gpio_out(25, HIGH);
+    // pwm_duty(25, percentage);
+    // percentage += direction;
 
-    if (percentage == 100) {
-      direction = -1;
-    } else if (percentage == 0) {
-      direction = 1;
-    }
+    // if (percentage == 100) {
+    //   direction = -1;
+    // } else if (percentage == 0) {
+    //   direction = 1;
+    // }
 
-    delay_ms(20);
+    delay_ms(200);
+    gpio_out(25, LOW);
+    delay_ms(200);
   }
 }
