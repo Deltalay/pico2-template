@@ -9,7 +9,7 @@ typedef enum {
 } rp2350_pin_state_t;
 typedef enum {
     JTAG = 0,
-    SPIO = 1,
+    SPI = 1,
     UART = 2,
     I2C = 3,
     PWM = 4,
