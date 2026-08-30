@@ -20,4 +20,5 @@ typedef struct {
 void i2c_init(rp2350_i2c_cfg_t *cfg);
 void i2c_master_write(rp2350_i2c_cfg_t *cfg, const uint8_t *data,
                       uint16_t data_len);
+void i2c_master_read(rp2350_i2c_cfg_t *cfg, uint8_t *dst, uint16_t len);
 #endif

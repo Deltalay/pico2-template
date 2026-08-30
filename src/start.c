@@ -77,7 +77,7 @@ void _start0(void) {
                           .speed = I2C_SPEED_FAST,
                           .operate = MASTER};
   i2c_init(&cfg);
-  oled_test(&cfg);
+
 
   while (1) {
   }
