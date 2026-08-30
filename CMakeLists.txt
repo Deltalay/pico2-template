@@ -1,5 +1,6 @@
 cmake_minimum_required(VERSION 3.15)
 set(ARCH "ARM" CACHE STRING "Switch between ARM and RISC-V")
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set_property(CACHE ARCH PROPERTY STRINGS ARM RISCV)
 if(ARCH STREQUAL "ARM")
     message(STATUS "Building for ARM")
@@ -15,6 +16,7 @@ if(ARCH STREQUAL "ARM")
         drivers/gpio.c
         drivers/usb.c
         drivers/uart.c
+        drivers/i2c.c
         drivers/pwm.c
         drivers/irq.c
         arch/arm/startup.S
@@ -36,6 +38,7 @@ elseif(ARCH STREQUAL "RISCV")
         src/start.c
         drivers/timer.c
         drivers/gpio.c
+        drivers/i2c.c
         drivers/usb.c
         drivers/uart.c
         drivers/pwm.c
@@ -66,7 +69,6 @@ target_compile_options(${TARGET_NAME} PRIVATE
     -Wshadow
     -Wundef
 )
-set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 if(ARCH STREQUAL "ARM")
     target_compile_definitions(${TARGET_NAME} PRIVATE ARCH_ARM)
 

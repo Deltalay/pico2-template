@@ -19,6 +19,7 @@ typedef enum {
 typedef enum {
   INPUT = 0,
   OUTPUT = 1,
+  BOTH = 2,
 } rp2350_gpio_direction_t;
 void gpio_init(uint8_t pin_number, rp2350_gpio_func_t function);
 void gpio_set(uint8_t pin_number, rp2350_gpio_direction_t direction);

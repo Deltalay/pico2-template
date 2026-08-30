@@ -40,11 +40,16 @@ void gpio_set(uint8_t pin_number, rp2350_gpio_direction_t direction) {
     *pad |= (1 << 7);
     SIO_GPIO_OE_CLR = 1 << pin_number;
     return;
+  } else if (direction == OUTPUT) {
+    // Disable input and disable output disable.
+    *pad &= ~(1 << 6);
+    *pad &= ~(1 << 7);
+    SIO_GPIO_OE_SET = 1 << pin_number;
+  } else {
+    *pad |= (1 << 6);
+    *pad &= ~(1 << 7);
+    SIO_GPIO_OE_SET = 1 << pin_number;
   }
-  // Disable input and disable output disable.
-  *pad &= ~(1 << 6);
-  *pad &= ~(1 << 7);
-  SIO_GPIO_OE_SET = 1 << pin_number;
 }
 void gpio_out(uint8_t pin_number, rp2350_pin_state_t state) {
   // For clr, and set it is WO.
