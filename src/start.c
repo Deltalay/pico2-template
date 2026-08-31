@@ -1,7 +1,7 @@
 #include "../header/gpio.h"
-#include "../header/i2c.h"
 #include "../header/reg.h"
 #include "../header/timer.h"
+#include "../header/uart.h"
 
 /*
  REFDIV:    1
@@ -66,20 +66,22 @@ void enable_fpu() {
 void _start0(void) {
 
   enable_fpu();
-  gpio_init(4, I2C);
-  gpio_init(5, I2C);
-  gpio_set(5, BOTH);
-  gpio_set(4, BOTH);
-
-  rp2350_i2c_cfg_t cfg = {.addr = 0x3C,
-                          .scl_pin = 5,
-                          .sda_pin = 4,
-                          .speed = I2C_SPEED_FAST,
-                          .operate = MASTER};
-  i2c_init(&cfg);
-
-
+  uart0_init(115200);
+  gpio_init(16, UART);
+  gpio_init(17, UART);
+  gpio_set(16, BOTH);
+  gpio_set(17, BOTH);
+  uint8_t data[1024];
+  uint16_t data_size = 1024;
+  for (uint16_t i = 0; i < data_size; i++) {
+    data[i] = '\0';
+  }
   while (1) {
+
+    uint16_t rec_size = uart0_reads(data, data_size);
+    if (rec_size) {
+      uart0_puts(data);
+    }
   }
   // RESETS_RESET &= ~((1u << 6) | (1U << 9));
   // while ((RESETS_RESET_DONE & ((1u << 6) | (1u << 9))) !=

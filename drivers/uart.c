@@ -61,6 +61,7 @@ void uart1_init(uint32_t baudrate) {
   UART1_UARTLCR_H &= ~(0b1111 << 0);
   UART1_UARTLCR_H |= (0b1 << 4);
   // This is redundant because the reset already 0b11
+  // TXE and RXE
   UART1_UARTCR |= (0b11 << 8);
   UART1_UARTCR &= ~(0b1 << 0);
   UART1_UARTCR |= (0b1 << 0);
@@ -77,13 +78,49 @@ void uart_set(uint8_t gpio) {
   *pad &= ~(1 << 2);
   *pad &= ~(1 << 8);
 }
-void uart0_put(char c) {
+uint16_t uart0_reads(uint8_t *data, uint16_t buffer_size) {
+  uint16_t i = 0;
+  // accomate -1 for \0
+  for (i = 0; i < buffer_size - 1; i++) {
+    // While 1, fifo is empty so we wait
+    data[i] = uart0_read();
+    if (data[i] == '\0' || data[i] == '\n' || data[i] == '\r')
+
+      break;
+  }
+  data[i] = '\0';
+  return i;
+}
+uint8_t uart0_read() {
+  while (UART0_UARTFR & (1 << 4)) {
+  }
+  return UART0_UARTDR & 0xFF;
+}
+uint8_t uart1_read() {
+  while (UART1_UARTFR & (1 << 4)) {
+  }
+  return UART1_UARTDR & 0xFF;
+}
+uint16_t uart1_reads(uint8_t *data, uint16_t buffer_size) {
+  uint16_t i = 0;
+  // accomate -1 for \0
+  for (i = 0; i < buffer_size - 1; i++) {
+    // While 1, fifo is empty so we wait
+    data[i] = uart1_read();
+    if (data[i] == '\0' || data[i] == '\n' || data[i] == '\r')
+
+      break;
+  }
+  data[i] = '\0';
+  return i;
+}
+void uart0_put(uint8_t c) {
   // Trasmit FIFO full, so we will wait
   while (UART0_UARTFR & (1 << 5)) {
   }
   UART0_UARTDR = c;
 }
-void uart0_puts(const char *text) {
+void uart0_puts(const uint8_t *text) {
   while (*text) {
     if (*text == '\n') {
       uart0_put('\r');
@@ -91,13 +128,13 @@ void uart0_puts(const char *text) {
     uart0_put(*text++);
   }
 }
-void uart1_put(char c) {
+void uart1_put(uint8_t c) {
   // Trasmit FIFO full, so we will wait
   while (UART1_UARTFR & (1 << 5)) {
   }
   UART1_UARTDR = c;
 }
-void uart1_puts(const char *text) {
+void uart1_puts(const uint8_t *text) {
   while (*text) {
     if (*text == '\n') {
       uart1_put('\r');
