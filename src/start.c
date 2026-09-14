@@ -67,10 +67,10 @@ void _start0(void) {
 
   enable_fpu();
   uart0_init(115200);
-  gpio_init(16, UART);
-  gpio_init(17, UART);
-  gpio_set(16, BOTH);
-  gpio_set(17, BOTH);
+  gpio_init(16, GPIO_UART);
+  gpio_init(17, GPIO_UART);
+  gpio_set(16, GPIO_IN_OUT);
+  gpio_set(17, GPIO_IN_OUT);
   uint8_t data[1024];
   uint16_t data_size = 1024;
   for (uint16_t i = 0; i < data_size; i++) {
@@ -105,8 +105,8 @@ void _start1(void) {
   // pwm_set(25);
   // uint8_t percentage = 0;
   // int8_t direction = 1;
-  gpio_init(25, SIO);
-  gpio_set(25, OUTPUT);
+  gpio_init(25, GPIO_SIO);
+  gpio_set(25, GPIO_IN_OUT);
   while (1) {
     gpio_out(25, HIGH);
     // pwm_duty(25, percentage);

@@ -34,13 +34,13 @@ void gpio_set(uint8_t pin_number, rp2350_gpio_direction_t direction) {
   volatile uint32_t *pad = (volatile uint32_t *)((uintptr_t)PADS_BANK0_BASE +
                                                  pin_number * 0x4 + 0x4);
 
-  if (direction == INPUT) {
+  if (direction == GPIO_INPUT) {
     // Enable INput and output disable
     *pad |= (1 << 6);
     *pad |= (1 << 7);
     SIO_GPIO_OE_CLR = 1 << pin_number;
     return;
-  } else if (direction == OUTPUT) {
+  } else if (direction == GPIO_OUTPUT) {
     // Disable input and disable output disable.
     *pad &= ~(1 << 6);
     *pad &= ~(1 << 7);

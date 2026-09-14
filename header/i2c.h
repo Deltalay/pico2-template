@@ -7,8 +7,8 @@ typedef enum {
   I2C_SPEED_FAST_PLUS = 1000000
 } rp2350_i2c_speed_t;
 typedef enum {
-  MASTER,
-  SLAVE,
+  I2C_MASTER,
+  I2C_SLAVE,
 } rp2350_i2c_operate_t;
 typedef struct {
   uint16_t addr;

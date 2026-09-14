@@ -23,7 +23,7 @@ void i2c_init(rp2350_i2c_cfg_t *cfg) {
   }
   if (i2c_block == 0) {
     I2C0_IC_ENABLE = 0;
-    if (cfg->operate == SLAVE) {
+    if (cfg->operate == I2C_SLAVE) {
       I2C0_IC_SAR = cfg->addr;
       I2C0_IC_CON &= ~((1 << 6) | (1 << 0));
     } else {
@@ -64,7 +64,7 @@ void i2c_init(rp2350_i2c_cfg_t *cfg) {
 
   } else {
     I2C1_IC_ENABLE = 0;
-    if (cfg->operate == SLAVE) {
+    if (cfg->operate == I2C_SLAVE) {
       I2C1_IC_SAR = cfg->addr;
       I2C1_IC_CON &= ~((1 << 6) | (1 << 0));
     } else {
