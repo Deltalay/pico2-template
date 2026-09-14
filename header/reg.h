@@ -18,6 +18,22 @@
 #endif
 
 // PI
+#define HW_ATOMIC_XOR_OFFSET 0x1000U
+#define HW_ATOMIC_SET_OFFSET 0x2000U
+#define HW_ATOMIC_CLR_OFFSET 0x3000U
+
+#define hw_set_bits(reg, mask)                                                 \
+  (*(volatile uint32_t *)((uintptr_t)&(reg) + HW_ATOMIC_SET_OFFSET) =          \
+       (uint32_t)(mask))
+
+#define hw_clear_bits(reg, mask)                                               \
+  (*(volatile uint32_t *)((uintptr_t)&(reg) + HW_ATOMIC_CLR_OFFSET) =          \
+       (uint32_t)(mask))
+
+#define hw_xor_bits(reg, mask)                                                 \
+  (*(volatile uint32_t *)((uintptr_t)&(reg) + HW_ATOMIC_XOR_OFFSET) =          \
+       (uint32_t)(mask))
+
 #define USB_REQ_GET_STATUS 0x00
 #define USB_REQ_CLEAR_FEATURE 0x01
 #define USB_REQ_SET_FEATURE 0x03
@@ -475,42 +491,42 @@
 #define UART1_UARTPCELLID3 (*(volatile uint32_t *)(UART1_BASE + 0xFFC))
 #define SPI0_BASE 0x40080000UL
 #define SPI1_BASE 0x40088000UL
-#define SPI0_SSPCR0        (*(volatile uint32_t *)(SPI0_BASE + 0x000))
-#define SPI0_SSPCR1        (*(volatile uint32_t *)(SPI0_BASE + 0x004))
-#define SPI0_SSPDR         (*(volatile uint32_t *)(SPI0_BASE + 0x008))
-#define SPI0_SSPSR         (*(volatile uint32_t *)(SPI0_BASE + 0x00C))
-#define SPI0_SSPCPSR       (*(volatile uint32_t *)(SPI0_BASE + 0x010))
-#define SPI0_SSPIMSC       (*(volatile uint32_t *)(SPI0_BASE + 0x014))
-#define SPI0_SSPRIS        (*(volatile uint32_t *)(SPI0_BASE + 0x018))
-#define SPI0_SSPMIS        (*(volatile uint32_t *)(SPI0_BASE + 0x01C))
-#define SPI0_SSPICR        (*(volatile uint32_t *)(SPI0_BASE + 0x020))
-#define SPI0_SSPDMACR      (*(volatile uint32_t *)(SPI0_BASE + 0x024))
-#define SPI0_SSPPERIPHID0  (*(volatile uint32_t *)(SPI0_BASE + 0xFE0))
-#define SPI0_SSPPERIPHID1  (*(volatile uint32_t *)(SPI0_BASE + 0xFE4))
-#define SPI0_SSPPERIPHID2  (*(volatile uint32_t *)(SPI0_BASE + 0xFE8))
-#define SPI0_SSPPERIPHID3  (*(volatile uint32_t *)(SPI0_BASE + 0xFEC))
-#define SPI0_SSPPCELLID0   (*(volatile uint32_t *)(SPI0_BASE + 0xFF0))
-#define SPI0_SSPPCELLID1   (*(volatile uint32_t *)(SPI0_BASE + 0xFF4))
-#define SPI0_SSPPCELLID2   (*(volatile uint32_t *)(SPI0_BASE + 0xFF8))
-#define SPI0_SSPPCELLID3   (*(volatile uint32_t *)(SPI0_BASE + 0xFFC))
-#define SPI1_SSPCR0        (*(volatile uint32_t *)(SPI1_BASE + 0x000))
-#define SPI1_SSPCR1        (*(volatile uint32_t *)(SPI1_BASE + 0x004))
-#define SPI1_SSPDR         (*(volatile uint32_t *)(SPI1_BASE + 0x008))
-#define SPI1_SSPSR         (*(volatile uint32_t *)(SPI1_BASE + 0x00C))
-#define SPI1_SSPCPSR       (*(volatile uint32_t *)(SPI1_BASE + 0x010))
-#define SPI1_SSPIMSC       (*(volatile uint32_t *)(SPI1_BASE + 0x014))
-#define SPI1_SSPRIS        (*(volatile uint32_t *)(SPI1_BASE + 0x018))
-#define SPI1_SSPMIS        (*(volatile uint32_t *)(SPI1_BASE + 0x01C))
-#define SPI1_SSPICR        (*(volatile uint32_t *)(SPI1_BASE + 0x020))
-#define SPI1_SSPDMACR      (*(volatile uint32_t *)(SPI1_BASE + 0x024))
-#define SPI1_SSPPERIPHID0  (*(volatile uint32_t *)(SPI1_BASE + 0xFE0))
-#define SPI1_SSPPERIPHID1  (*(volatile uint32_t *)(SPI1_BASE + 0xFE4))
-#define SPI1_SSPPERIPHID2  (*(volatile uint32_t *)(SPI1_BASE + 0xFE8))
-#define SPI1_SSPPERIPHID3  (*(volatile uint32_t *)(SPI1_BASE + 0xFEC))
-#define SPI1_SSPPCELLID0   (*(volatile uint32_t *)(SPI1_BASE + 0xFF0))
-#define SPI1_SSPPCELLID1   (*(volatile uint32_t *)(SPI1_BASE + 0xFF4))
-#define SPI1_SSPPCELLID2   (*(volatile uint32_t *)(SPI1_BASE + 0xFF8))
-#define SPI1_SSPPCELLID3   (*(volatile uint32_t *)(SPI1_BASE + 0xFFC))
+#define SPI0_SSPCR0 (*(volatile uint32_t *)(SPI0_BASE + 0x000))
+#define SPI0_SSPCR1 (*(volatile uint32_t *)(SPI0_BASE + 0x004))
+#define SPI0_SSPDR (*(volatile uint32_t *)(SPI0_BASE + 0x008))
+#define SPI0_SSPSR (*(volatile uint32_t *)(SPI0_BASE + 0x00C))
+#define SPI0_SSPCPSR (*(volatile uint32_t *)(SPI0_BASE + 0x010))
+#define SPI0_SSPIMSC (*(volatile uint32_t *)(SPI0_BASE + 0x014))
+#define SPI0_SSPRIS (*(volatile uint32_t *)(SPI0_BASE + 0x018))
+#define SPI0_SSPMIS (*(volatile uint32_t *)(SPI0_BASE + 0x01C))
+#define SPI0_SSPICR (*(volatile uint32_t *)(SPI0_BASE + 0x020))
+#define SPI0_SSPDMACR (*(volatile uint32_t *)(SPI0_BASE + 0x024))
+#define SPI0_SSPPERIPHID0 (*(volatile uint32_t *)(SPI0_BASE + 0xFE0))
+#define SPI0_SSPPERIPHID1 (*(volatile uint32_t *)(SPI0_BASE + 0xFE4))
+#define SPI0_SSPPERIPHID2 (*(volatile uint32_t *)(SPI0_BASE + 0xFE8))
+#define SPI0_SSPPERIPHID3 (*(volatile uint32_t *)(SPI0_BASE + 0xFEC))
+#define SPI0_SSPPCELLID0 (*(volatile uint32_t *)(SPI0_BASE + 0xFF0))
+#define SPI0_SSPPCELLID1 (*(volatile uint32_t *)(SPI0_BASE + 0xFF4))
+#define SPI0_SSPPCELLID2 (*(volatile uint32_t *)(SPI0_BASE + 0xFF8))
+#define SPI0_SSPPCELLID3 (*(volatile uint32_t *)(SPI0_BASE + 0xFFC))
+#define SPI1_SSPCR0 (*(volatile uint32_t *)(SPI1_BASE + 0x000))
+#define SPI1_SSPCR1 (*(volatile uint32_t *)(SPI1_BASE + 0x004))
+#define SPI1_SSPDR (*(volatile uint32_t *)(SPI1_BASE + 0x008))
+#define SPI1_SSPSR (*(volatile uint32_t *)(SPI1_BASE + 0x00C))
+#define SPI1_SSPCPSR (*(volatile uint32_t *)(SPI1_BASE + 0x010))
+#define SPI1_SSPIMSC (*(volatile uint32_t *)(SPI1_BASE + 0x014))
+#define SPI1_SSPRIS (*(volatile uint32_t *)(SPI1_BASE + 0x018))
+#define SPI1_SSPMIS (*(volatile uint32_t *)(SPI1_BASE + 0x01C))
+#define SPI1_SSPICR (*(volatile uint32_t *)(SPI1_BASE + 0x020))
+#define SPI1_SSPDMACR (*(volatile uint32_t *)(SPI1_BASE + 0x024))
+#define SPI1_SSPPERIPHID0 (*(volatile uint32_t *)(SPI1_BASE + 0xFE0))
+#define SPI1_SSPPERIPHID1 (*(volatile uint32_t *)(SPI1_BASE + 0xFE4))
+#define SPI1_SSPPERIPHID2 (*(volatile uint32_t *)(SPI1_BASE + 0xFE8))
+#define SPI1_SSPPERIPHID3 (*(volatile uint32_t *)(SPI1_BASE + 0xFEC))
+#define SPI1_SSPPCELLID0 (*(volatile uint32_t *)(SPI1_BASE + 0xFF0))
+#define SPI1_SSPPCELLID1 (*(volatile uint32_t *)(SPI1_BASE + 0xFF4))
+#define SPI1_SSPPCELLID2 (*(volatile uint32_t *)(SPI1_BASE + 0xFF8))
+#define SPI1_SSPPCELLID3 (*(volatile uint32_t *)(SPI1_BASE + 0xFFC))
 #define I2C0_BASE 0x40090000UL
 #define I2C1_BASE 0x40098000UL
 #define I2C0_IC_CON (*(volatile uint32_t *)(I2C0_BASE + 0x00u))
