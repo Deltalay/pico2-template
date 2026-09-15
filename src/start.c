@@ -1,5 +1,6 @@
 #include "../header/gpio.h"
 #include "../header/reg.h"
+#include "../header/reset.h"
 #include "../header/timer.h"
 #include "../header/uart.h"
 
@@ -66,16 +67,50 @@ void enable_fpu() {
 void _start0(void) {
 
   enable_fpu();
+  unreset_s(RESET_IO_BANK_0);
+  unreset_s(RESET_PADS_BANK0);
+  unreset_s(RESET_UART0);
+  wait_until_reset_s_done(RESET_IO_BANK_0);
+  wait_until_reset_s_done(RESET_PADS_BANK0);
+  wait_until_reset_s_done(RESET_UART0);
+
   uart0_init(115200);
-  gpio_init(16, GPIO_UART);
-  gpio_init(17, GPIO_UART);
-  gpio_set(16, GPIO_IN_OUT);
-  gpio_set(17, GPIO_IN_OUT);
-  uint8_t data[1024];
+  rp2350_gpio_t uart_pin = {
+      .direction = GPIO_IN_OUT,
+      .pin_number = 16,
+      .function = GPIO_UART,
+      .irq_over = ENM_NORMAL,
+      .in_over = ENM_NORMAL,
+      .oe_over = ENM_NORMAL,
+      .out_over = ENM_NORMAL,
+      .drive = DRIVE_12MA,
+      .pull_mode = GPIO_PULL_UP,
+      .schmitt = GPIO_SCHMITT_DISABLE,
+      .slew_rate = GPIO_SLEW_SLOW,
+  };
+  rp2350_gpio_t uart_pin1 = {
+      .direction = GPIO_IN_OUT,
+      .pin_number = 17,
+      .function = GPIO_UART,
+      .irq_over = ENM_NORMAL,
+      .in_over = ENM_NORMAL,
+      .oe_over = ENM_NORMAL,
+      .out_over = ENM_NORMAL,
+      .drive = DRIVE_12MA,
+      .pull_mode = GPIO_PULL_UP,
+      .schmitt = GPIO_SCHMITT_DISABLE,
+      .slew_rate = GPIO_SLEW_SLOW,
+  };
+  gpio_init(&uart_pin);
+  gpio_init(&uart_pin1);
+
+  static uint8_t data[1024];
   uint16_t data_size = 1024;
   for (uint16_t i = 0; i < data_size; i++) {
     data[i] = '\0';
   }
+  uart0_puts((uint8_t *)"HELLO WORLD");
+
   while (1) {
 
     uint16_t rec_size = uart0_reads(data, data_size);
@@ -101,23 +136,26 @@ void _start0(void) {
 }
 void _start1(void) {
   enable_fpu();
-  // pwm_init();
-  // pwm_set(25);
-  // uint8_t percentage = 0;
-  // int8_t direction = 1;
-  gpio_init(25, GPIO_SIO);
-  gpio_set(25, GPIO_IN_OUT);
+  unreset_s(RESET_PADS_BANK0);
+  unreset_s(RESET_IO_BANK_0);
+  wait_until_reset_s_done(RESET_IO_BANK_0);
+  wait_until_reset_s_done(RESET_PADS_BANK0);
+  rp2350_gpio_t led_pin = {
+      .direction = GPIO_OUTPUT,
+      .pin_number = 25,
+      .function = GPIO_SIO,
+      .irq_over = ENM_NORMAL,
+      .in_over = ENM_NORMAL,
+      .oe_over = ENM_NORMAL,
+      .out_over = ENM_NORMAL,
+      .drive = DRIVE_12MA,
+      .pull_mode = GPIO_PULL_UP,
+      .schmitt = GPIO_SCHMITT_ENABLE,
+      .slew_rate = GPIO_SLEW_SLOW,
+  };
+  gpio_init(&led_pin);
   while (1) {
     gpio_out(25, HIGH);
-    // pwm_duty(25, percentage);
-    // percentage += direction;
-
-    // if (percentage == 100) {
-    //   direction = -1;
-    // } else if (percentage == 0) {
-    //   direction = 1;
-    // }
-
     delay_ms(200);
     gpio_out(25, LOW);
     delay_ms(200);

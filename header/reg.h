@@ -21,7 +21,14 @@
 #define HW_ATOMIC_XOR_OFFSET 0x1000U
 #define HW_ATOMIC_SET_OFFSET 0x2000U
 #define HW_ATOMIC_CLR_OFFSET 0x3000U
+#define hw_set_bits_ptr(reg, mask)                                             \
+  (*(volatile uint32_t *)((uintptr_t)(reg) + HW_ATOMIC_SET_OFFSET) = (mask))
 
+#define hw_clear_bits_ptr(reg, mask)                                           \
+  (*(volatile uint32_t *)((uintptr_t)(reg) + HW_ATOMIC_CLR_OFFSET) = (mask))
+
+#define hw_xor_bits_ptr(reg, mask)                                             \
+  (*(volatile uint32_t *)((uintptr_t)(reg) + HW_ATOMIC_XOR_OFFSET) = (mask))
 #define hw_set_bits(reg, mask)                                                 \
   (*(volatile uint32_t *)((uintptr_t)&(reg) + HW_ATOMIC_SET_OFFSET) =          \
        (uint32_t)(mask))
