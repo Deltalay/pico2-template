@@ -285,9 +285,6 @@ vector_table:
     .weak      SPAREIRQ_IRQ_5
     .thumb_set SPAREIRQ_IRQ_5,Default_Handler
 
-
-
-
 .section .text
 .type Reset_Handler, %function
 .thumb_func

@@ -1,16 +1,7 @@
 #include "../header/pwm.h"
 #include "../header/reg.h"
 #define TOP_VALUE 65534
-void pwm_init() {
-  // set pwm to 0
-  RESETS_RESET &= ~(1 << 16);
-  RESETS_RESET &= ~(1U << 9);
-  // wait til pwm done reset
-  while (!(RESETS_RESET_DONE & (1 << 16))) {
-  };
-  while (!(RESETS_RESET_DONE & (1 << 9))) {
-  };
-}
+
 void pwm_duty(uint8_t gpio, uint8_t duty_percentage) {
   uint16_t duty_translate = (uint32_t)duty_percentage * TOP_VALUE / 100;
   uint8_t slice;
